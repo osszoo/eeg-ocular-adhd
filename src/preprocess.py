@@ -15,14 +15,34 @@ def bandpass(raw, l_freq=L_FREQ, h_freq=H_FREQ):
         method='fir', phase='zero', fir_design='firwin')
 
 if __name__ == '__main__':
-    arr = load_subject(sorted(Path('ADHD_part1').glob('*.mat'))[0])
-    raw = to_raw(arr)
+    import numpy as np
 
-    # 필터 전 PSD: 50Hz 라인노이즈 유무 + 고주파 감쇠 지점 확인
-    raw.compute_psd(fmax=64).plot()
+    # ADHD(part1)와 Control 폴더에서 각각 앞쪽 몇 명씩 뽑아 PSD 비교
+    n_each = 4
+    groups = {
+        'ADHD':    sorted(Path('ADHD_part1').glob('*.mat'))[:n_each],
+        'Control': sorted(Path('Control_part1').glob('*.mat'))[:n_each],
+    }
+
+    fig, ax = plt.subplots(figsize=(11, 4))
+    colors = {'ADHD': 'tab:red', 'Control': 'tab:blue'}
+
+    for label, files in groups.items():
+        for f in files:
+            raw = to_raw(load_subject(f))
+            psd = raw.compute_psd(fmax=64)
+            freqs = psd.freqs
+            # 채널 평균 후 dB 변환 — 한 사람당 곡선 하나
+            mean_power = 10 * np.log10(psd.get_data().mean(axis=0))
+            ax.plot(freqs, mean_power, color=colors[label],
+                    alpha=0.6, linewidth=0.8,
+                    label=label if f == files[0] else None)
+
+    ax.set_xlabel('Frequency (Hz)')
+    ax.set_ylabel('Power (dB)')
+    ax.set_title(f'PSD: ADHD vs Control (각 {n_each}명, 필터 전)')
+    ax.axvline(40, color='gray', linestyle='--', linewidth=0.8)  # 로우패스 후보선
+    ax.axvline(50, color='black', linestyle=':', linewidth=0.8)  # 라인노이즈 위치
+    ax.legend()
+    plt.tight_layout()
     plt.show()
-
-    filt = bandpass(raw)
-    print('=== 밴드패스 검증 ===')
-    print(f'대역: {L_FREQ}–{H_FREQ} Hz, FIR zero-phase')
-    print('필터 후 길이(초):', round(filt.n_times / filt.info['sfreq'], 1))
