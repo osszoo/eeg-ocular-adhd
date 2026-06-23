@@ -78,3 +78,36 @@ print('  → Fp1·Fp2·F7·F8가 올라오면 안구 신호가 살아 있다는 
 dmad_med = np.median(np.vstack([v['ch_dmad'] for v in subjects.values()]))
 print(f'\n차분 기반 크기(표류 제거): diff-MAD 중앙값 {dmad_med:.1f}')
 print('  → 수십이면 정상 µV(표류가 MAD를 키운 것), 수백이면 단위가 µV 아님(정수 스케일 의심)')
+
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'src'))
+import matplotlib.pyplot as plt
+from load_data import load_subject, to_raw
+
+plt.rcParams['font.family'] = 'Malgun Gothic'   # 한글 폰트 (경고 제거)
+plt.rcParams['axes.unicode_minus'] = False       # 음수 축 라벨 깨짐 방지
+
+# --- PSD 진단: ADHD vs Control, H_FREQ 근거 확인용 ---
+n_each = 4
+groups = {
+    'ADHD':    sorted(Path('ADHD_part1').glob('*.mat'))[:n_each],
+    'Control': sorted(Path('Control_part1').glob('*.mat'))[:n_each],
+}
+colors = {'ADHD': 'tab:red', 'Control': 'tab:blue'}
+
+fig, ax = plt.subplots(figsize=(11, 4))
+for label, files in groups.items():
+    for f in files:
+        raw = to_raw(load_subject(f))
+        psd = raw.compute_psd(fmax=64)
+        mean_power = 10 * np.log10(psd.get_data().mean(axis=0))
+        ax.plot(psd.freqs, mean_power, color=colors[label],
+                alpha=0.6, linewidth=0.8,
+                label=label if f == files[0] else None)
+
+ax.set(xlabel='Frequency (Hz)', ylabel='Power (dB)',
+       title=f'PSD: ADHD vs Control (각 {n_each}명, 필터 전)')
+ax.axvline(40, color='gray', linestyle='--', linewidth=0.8)
+ax.axvline(50, color='black', linestyle=':', linewidth=0.8)
+ax.legend(); plt.tight_layout(); plt.show()
