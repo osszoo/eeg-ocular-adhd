@@ -111,3 +111,24 @@ ax.set(xlabel='Frequency (Hz)', ylabel='Power (dB)',
 ax.axvline(40, color='gray', linestyle='--', linewidth=0.8)
 ax.axvline(50, color='black', linestyle=':', linewidth=0.8)
 ax.legend(); plt.tight_layout(); plt.show()
+
+# --- CAR 효과 진단: 밴드패스 vs 밴드패스+CAR (채널 평균 PSD) ---
+from preprocess import bandpass, car   # 확정된 파이프라인 함수 재사용
+
+f = sorted(Path('ADHD_part1').glob('*.mat'))[0]   # 기존 PSD와 동일 피험자(v10p)
+raw = to_raw(load_subject(f))
+
+filt = bandpass(raw)        # 1단계: 밴드패스
+reref = car(filt)           # 2단계: CAR
+
+psd_filt = filt.compute_psd(fmax=64)
+psd_car = reref.compute_psd(fmax=64)
+
+fig, ax = plt.subplots(figsize=(11, 4))
+ax.plot(psd_filt.freqs, 10*np.log10(psd_filt.get_data().mean(axis=0)),
+        color='tab:gray',  linewidth=1.3, label='밴드패스만')
+ax.plot(psd_car.freqs,  10*np.log10(psd_car.get_data().mean(axis=0)),
+        color='tab:green', linewidth=1.3, label='밴드패스 + CAR')
+ax.set(xlabel='Frequency (Hz)', ylabel='Power (dB)',
+       title='CAR 효과: 채널 평균 PSD (동일 피험자)')
+ax.legend(); plt.tight_layout(); plt.show()
