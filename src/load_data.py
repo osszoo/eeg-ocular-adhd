@@ -8,9 +8,9 @@ from pathlib import Path
 mne.set_log_level('WARNING')
 
 SFREQ = 128
-CH = ['Fz','Cz','Pz','C3','T3','C4','T4','Fp1','Fp2','F3',
-      'F4','F7','F8','P3','P4','T5','T6','O1','O2']
-RENAME = {'T3':'T7', 'T4':'T8', 'T5':'P7', 'T6':'P8'}   # 구형→현대 명명
+CH = ['Fp1','Fp2','F3','F4','C3','C4','P3','P4','O1','O2',
+      'F7','F8','T7','T8','P7','P8','Fz','Cz','Pz']
+# RENAME 삭제 — 표가 이미 현대 명칭이라 환산 불필요
 
 def load_subject(mat_path):
     """.mat → (samples, 19) numpy 배열"""
@@ -25,8 +25,7 @@ def to_raw(arr):
     """(samples, 19) 배열 → 몽타주가 부착된 Raw 객체 (신호 미가공)"""
     info = mne.create_info(ch_names=CH, sfreq=SFREQ, ch_types='eeg')
     raw = mne.io.RawArray(arr.T * 1e-6, info)    # (채널×샘플), µV→V 규약
-    raw.rename_channels(RENAME)
-    raw.set_montage('standard_1020')
+    raw.set_montage('standard_1020')             # rename_channels 줄 삭제
     return raw
 
 if __name__ == '__main__':
