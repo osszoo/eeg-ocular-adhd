@@ -1,16 +1,23 @@
-import scipy.io as sio
-import numpy as np
+"""탐색·진단 스크립트: 적재 무결성 점검 + PSD 시각화.
+파이프라인 함수(load_subject/to_raw, bandpass/car)는 src/ 에서 import해 재사용한다."""
+import sys
 from pathlib import Path
 
-SFREQ = 128
+# src/ 를 import 경로에 추가 (exploration/ 과 src/ 가 프로젝트 루트에 나란히 있는 구조)
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'src'))
 
-def load_subject(mat_path):
-    mat = sio.loadmat(mat_path)
-    var = [k for k in mat if not k.startswith('__')][0]
-    arr = np.asarray(mat[var], dtype=float)
-    if arr.shape[0] == 19 and arr.shape[1] != 19:
-        arr = arr.T
-    return arr
+import numpy as np
+import matplotlib.pyplot as plt
+from load_data import load_subject, to_raw   # 로딩은 load_data 단일 출처
+from preprocess import bandpass, car          # 확정된 파이프라인 함수 재사용
+
+plt.rcParams['font.family'] = 'Malgun Gothic'   # 한글 폰트 (경고 제거)
+plt.rcParams['axes.unicode_minus'] = False       # 음수 축 라벨 깨짐 방지
+
+SFREQ = 128
+CH = ['Fp1','Fp2','F3','F4','C3','C4','P3','P4','O1','O2',
+      'F7','F8','T7','T8','P7','P8','Fz','Cz','Pz']
+
 
 def load_group(folders, label):
     out = {}
@@ -31,6 +38,7 @@ def load_group(folders, label):
             }
     return out
 
+
 subjects = {}
 subjects.update(load_group(['ADHD_part1', 'ADHD_part2'], 1))
 subjects.update(load_group(['Control_part1', 'Control_part2'], 0))
@@ -47,7 +55,8 @@ def stat(group, name):
 stat(adhd, 'ADHD   ')
 stat(ctrl, 'Control')
 
-# ICA 데이터 충분성: 임계 미만 피험자 수
+# ICA 데이터 충분성 사전 점검 (ICA를 돌리는 게 아니라, 길이가 짧아 나중에
+# 성분 분리가 불안정할 수 있는 피험자가 몇 명인지 미리 세어두는 카운트)
 for thr in (60, 90):
     n = sum(v['dur'] < thr for v in subjects.values())
     print(f'  {thr}초 미만 피험자: {n}명')
@@ -59,9 +68,6 @@ amp = np.array([[v['amp_min'], v['amp_max']] for v in subjects.values()])
 print(f'\n채널수≠19 : {bad_ch if bad_ch else "없음"}')
 print(f'NaN 포함  : {nan_s if nan_s else "없음"}')
 print(f'전체 진폭 범위: {amp[:,0].min():.1f} ~ {amp[:,1].max():.1f}')
-
-CH = ['Fz','Cz','Pz','C3','T3','C4','T4','Fp1','Fp2','F3',
-      'F4','F7','F8','P3','P4','T5','T6','O1','O2']
 
 std_med  = np.median(np.vstack([v['ch_std']  for v in subjects.values()]))
 mad_med  = np.median(np.vstack([v['ch_mad']  for v in subjects.values()]))
@@ -79,16 +85,20 @@ dmad_med = np.median(np.vstack([v['ch_dmad'] for v in subjects.values()]))
 print(f'\n차분 기반 크기(표류 제거): diff-MAD 중앙값 {dmad_med:.1f}')
 print('  → 수십이면 정상 µV(표류가 MAD를 키운 것), 수백이면 단위가 µV 아님(정수 스케일 의심)')
 
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'src'))
-import matplotlib.pyplot as plt
-from load_data import load_subject, to_raw
+# ============================================================================
+# PSD 시각화 — 아래 두 블록은 '서로 다른 질문'에 답하는 별개의 그림이다.
+#   [블록 A] 그룹 PSD : "로우패스 상한을 40Hz로 잡아도 되나?"   → 여러 명, 원본만
+#   [블록 B] 단계별 PSD: "전처리 단계가 신호를 의도대로 바꿨나?" → 한 명, 단계별
+# 둘 다 '원본 PSD'를 그리지만 대상이 달라(8명 vs 1명) 중복이 아니며,
+# 한쪽이 다른 쪽을 대체하지 못한다. 둘 다 유지할 것.
+# ============================================================================
 
-plt.rcParams['font.family'] = 'Malgun Gothic'   # 한글 폰트 (경고 제거)
-plt.rcParams['axes.unicode_minus'] = False       # 음수 축 라벨 깨짐 방지
-
-# --- PSD 진단: ADHD vs Control, H_FREQ 근거 확인용 ---
+# --- [블록 A] 그룹 PSD: H_FREQ(=40) 근거 확인용 -----------------------------
+# 목적 : 로우패스 상한 결정 근거. 개체차를 넘어선 '공통 패턴'을 봐야 하므로
+#        여러 명(ADHD 4 + Control 4)을 겹쳐 그린다. 신호는 전부 필터 전 원본.
+# 판독 : 여러 명에서 공통으로 40Hz 위에 의미있는 신경신호가 없고(→상한 40 타당),
+#        50Hz에 라인노이즈 봉우리가 보이면 H_FREQ=40 확정 근거가 된다.
+# 주의 : 여기 피험자는 8명. 단계 효과가 아니라 '주파수 상한'을 보는 그림이다.
 n_each = 4
 groups = {
     'ADHD':    sorted(Path('ADHD_part1').glob('*.mat'))[:n_each],
@@ -108,27 +118,57 @@ for label, files in groups.items():
 
 ax.set(xlabel='Frequency (Hz)', ylabel='Power (dB)',
        title=f'PSD: ADHD vs Control (각 {n_each}명, 필터 전)')
-ax.axvline(40, color='gray', linestyle='--', linewidth=0.8)
-ax.axvline(50, color='black', linestyle=':', linewidth=0.8)
+ax.axvline(40, color='gray', linestyle='--', linewidth=0.8)   # 로우패스 상한 후보
+ax.axvline(50, color='black', linestyle=':', linewidth=0.8)   # 전원 라인노이즈
 ax.legend(); plt.tight_layout(); plt.show()
 
-# --- CAR 효과 진단: 밴드패스 vs 밴드패스+CAR (채널 평균 PSD) ---
-from preprocess import bandpass, car   # 확정된 파이프라인 함수 재사용
+# --- [블록 B] 단계별 PSD: 전처리 단계 검증용 --------------------------------
+# 목적 : 각 전처리 단계(원본→bandpass→+CAR)가 신호를 의도대로 바꿨는지 확인.
+#        단계 '효과'를 보려면 피험자를 고정해야 한다(사람이 바뀌면 변화가
+#        전처리 때문인지 개체차 때문인지 구분 불가). 그래서 동일 1명(v10p)만 사용.
+# 판독 : ① 원본은 40Hz 위까지 파워가 이어지고 50Hz 라인노이즈가 보인다.
+#        ② bandpass 후 40Hz 위가 깎이고 0.5Hz 미만 표류가 정리된다.
+#        ③ +CAR 후 모양은 ②와 거의 같되 공통성분만큼 1–30Hz가 몇 dB 내려간다.
+#        ④ 셋을 겹쳐 '고주파 절단(①→②)'과 '전체 하강(②→③)'을 한눈에 확인.
+# 주의 : 블록 A와 달리 여기 피험자는 1명. 일반화 근거가 아니라 단계 검증용이다.
+f = sorted(Path('ADHD_part1').glob('*.mat'))[0]   # 단계 비교용 동일 피험자(v10p)
+raw = to_raw(load_subject(f))     # 원본 (필터 전)
+filt = bandpass(raw)              # 1단계: 밴드패스
+reref = car(filt)                 # 2단계: CAR
 
-f = sorted(Path('ADHD_part1').glob('*.mat'))[0]   # 기존 PSD와 동일 피험자(v10p)
-raw = to_raw(load_subject(f))
-
-filt = bandpass(raw)        # 1단계: 밴드패스
-reref = car(filt)           # 2단계: CAR
-
+# 세 단계 PSD를 미리 계산 (모두 동일 피험자에서 파생 → 직접 비교 가능)
+psd_raw  = raw.compute_psd(fmax=64)
 psd_filt = filt.compute_psd(fmax=64)
-psd_car = reref.compute_psd(fmax=64)
+psd_car  = reref.compute_psd(fmax=64)
 
+db = lambda psd: 10 * np.log10(psd.get_data().mean(axis=0))   # 채널평균 → dB
+
+# ① 원본 단독
 fig, ax = plt.subplots(figsize=(11, 4))
-ax.plot(psd_filt.freqs, 10*np.log10(psd_filt.get_data().mean(axis=0)),
-        color='tab:gray',  linewidth=1.3, label='밴드패스만')
-ax.plot(psd_car.freqs,  10*np.log10(psd_car.get_data().mean(axis=0)),
-        color='tab:green', linewidth=1.3, label='밴드패스 + CAR')
+ax.plot(psd_raw.freqs, db(psd_raw), color='tab:blue', linewidth=1.3)
 ax.set(xlabel='Frequency (Hz)', ylabel='Power (dB)',
-       title='CAR 효과: 채널 평균 PSD (동일 피험자)')
+       title='① 원본 PSD (필터 전, v10p)')
+plt.tight_layout(); plt.show()
+
+# ② bandpass만
+fig, ax = plt.subplots(figsize=(11, 4))
+ax.plot(psd_filt.freqs, db(psd_filt), color='tab:gray', linewidth=1.3)
+ax.set(xlabel='Frequency (Hz)', ylabel='Power (dB)',
+       title='② 밴드패스 후 PSD (v10p)')
+plt.tight_layout(); plt.show()
+
+# ③ bandpass + CAR
+fig, ax = plt.subplots(figsize=(11, 4))
+ax.plot(psd_car.freqs, db(psd_car), color='tab:green', linewidth=1.3)
+ax.set(xlabel='Frequency (Hz)', ylabel='Power (dB)',
+       title='③ 밴드패스 + CAR 후 PSD (v10p)')
+plt.tight_layout(); plt.show()
+
+# ④ 세 단계 겹쳐 비교
+fig, ax = plt.subplots(figsize=(11, 4))
+ax.plot(psd_raw.freqs,  db(psd_raw),  color='tab:blue',  linewidth=1.3, label='① 원본')
+ax.plot(psd_filt.freqs, db(psd_filt), color='tab:gray',  linewidth=1.3, label='② 밴드패스')
+ax.plot(psd_car.freqs,  db(psd_car),  color='tab:green', linewidth=1.3, label='③ 밴드패스+CAR')
+ax.set(xlabel='Frequency (Hz)', ylabel='Power (dB)',
+       title='④ 단계별 PSD 비교 (동일 피험자 v10p)')
 ax.legend(); plt.tight_layout(); plt.show()
