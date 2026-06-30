@@ -64,46 +64,46 @@ def frontal_retention(orig, clean, idx):
     v1 = clean[idx].var(axis=1)
     return float(np.mean(v1 / v0) * 100)
 
+if __name__ == '__main__':
+    # 진단 대상: ADHD·Control 각 (짧은 1 + 전형 2)명
+    sample = []
+    sample += [(f, d, 'ADHD')    for f, d in pick_subjects(['ADHD_part1', 'ADHD_part2'])]
+    sample += [(f, d, 'Control') for f, d in pick_subjects(['Control_part1', 'Control_part2'])]
 
-# 진단 대상: ADHD·Control 각 (짧은 1 + 전형 2)명
-sample = []
-sample += [(f, d, 'ADHD')    for f, d in pick_subjects(['ADHD_part1', 'ADHD_part2'])]
-sample += [(f, d, 'Control') for f, d in pick_subjects(['Control_part1', 'Control_part2'])]
+    # cutoff별 두 지표 수집 (피험자당 ASR을 cutoff 수만큼 돌리므로 다소 무겁다)
+    rows = []
+    for f, dur, grp in sample:
+        cared = car(bandpass(to_raw(load_subject(f))))   # 잠근 순서: bandpass → CAR
+        base = cared.get_data()                          # ASR 기준선(off)
+        idx = [cared.ch_names.index(ch) for ch in FRONTAL]
 
-# cutoff별 두 지표 수집 (피험자당 ASR을 cutoff 수만큼 돌리므로 다소 무겁다)
-rows = []
-for f, dur, grp in sample:
-    cared = car(bandpass(to_raw(load_subject(f))))   # 잠근 순서: bandpass → CAR
-    base = cared.get_data()                          # ASR 기준선(off)
-    idx = [cared.ch_names.index(ch) for ch in FRONTAL]
-
-    recon, retain = [], []
-    for c in CUTOFFS:
-        if c is None:                                # off = 기준선
-            recon.append(0.0); retain.append(100.0)
-        else:
-            clean = asr(cared, cutoff=c).get_data()  # 잠근 asr() 그대로 사용
-            recon.append(recon_fraction(base, clean))
-            retain.append(frontal_retention(base, clean, idx))
-    rows.append({'name': f.stem, 'grp': grp, 'dur': dur, 'recon': recon, 'retain': retain})
-
-
-def print_table(title, hint, key):
-    """한 지표를 피험자(행)×cutoff(열) 표로 출력."""
-    header = f'{"피험자":<8}{"그룹":<8}{"길이":>5}   ' + '  '.join(
-        f'{("off" if c is None else c):>6}' for c in CUTOFFS)
-    print(f'\n=== {title} ===')
-    print(hint)
-    print(header)
-    print('-' * len(header))
-    for r in rows:
-        flag = '*' if r['dur'] < SHORT_THR else ' '   # 짧은 녹화 표시
-        print(f'{r["name"]:<8}{r["grp"]:<8}{r["dur"]:>4.0f}{flag}  '
-              + '  '.join(f'{v:>6.1f}' for v in r[key]))
-    print('  (* = 90초 미만 짧은 녹화)')
+        recon, retain = [], []
+        for c in CUTOFFS:
+            if c is None:                                # off = 기준선
+                recon.append(0.0); retain.append(100.0)
+            else:
+                clean = asr(cared, cutoff=c).get_data()  # 잠근 asr() 그대로 사용
+                recon.append(recon_fraction(base, clean))
+                retain.append(frontal_retention(base, clean, idx))
+        rows.append({'name': f.stem, 'grp': grp, 'dur': dur, 'recon': recon, 'retain': retain})
 
 
-print_table('재구성률(%) — ASR이 타임라인을 손댄 비율',
-            '  낮을수록 적게 건드림. 과도하게 높으면 정상 신호까지 제거 의심.', 'recon')
-print_table('전두 분산 보존율(%) — Fp1·Fp2·F7·F8',
-            '  100=그대로. cutoff 낮출 때 급격히 무너지는 지점 직전이 안구 보존 하한.', 'retain')
+    def print_table(title, hint, key):
+        """한 지표를 피험자(행)×cutoff(열) 표로 출력."""
+        header = f'{"피험자":<8}{"그룹":<8}{"길이":>5}   ' + '  '.join(
+            f'{("off" if c is None else c):>6}' for c in CUTOFFS)
+        print(f'\n=== {title} ===')
+        print(hint)
+        print(header)
+        print('-' * len(header))
+        for r in rows:
+            flag = '*' if r['dur'] < SHORT_THR else ' '   # 짧은 녹화 표시
+            print(f'{r["name"]:<8}{r["grp"]:<8}{r["dur"]:>4.0f}{flag}  '
+                + '  '.join(f'{v:>6.1f}' for v in r[key]))
+        print('  (* = 90초 미만 짧은 녹화)')
+
+
+    print_table('재구성률(%) — ASR이 타임라인을 손댄 비율',
+                '  낮을수록 적게 건드림. 과도하게 높으면 정상 신호까지 제거 의심.', 'recon')
+    print_table('전두 분산 보존율(%) — Fp1·Fp2·F7·F8',
+                '  100=그대로. cutoff 낮출 때 급격히 무너지는 지점 직전이 안구 보존 하한.', 'retain')
