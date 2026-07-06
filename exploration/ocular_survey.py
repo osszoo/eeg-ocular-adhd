@@ -80,3 +80,24 @@ if no_ocular:
           f'— 0.4~0.5 근처가 많으면 τ에 예민, 낮으면 확실히 안구 없음')
     print(f'  0.4~0.5 구간: {sum(0.4<=x<0.5 for x in near)}명, '
           f'0.3 미만: {sum(x<0.3 for x in near)}명')
+    
+# --- 대표 선정용: 안구 IC 보유 84명 명단 (ID·집단·top-1 eye 확률·녹화 길이) ---
+# 에폭 길이·추정기 스윕의 대표는 84명 안에서 골라야 하므로 명단을 출력한다.
+# max_eye = 그 피험자에서 eye 확률이 가장 높은 IC 값 → 보유자에겐 top-1 안구 IC 확률.
+# 길이는 load_subject로 배열 shape만 읽어 계산(몽타주 불필요, 가벼움).
+from load_data import load_subject, SFREQ
+
+path_of = {f.stem: f for f, _ in all_subjects()}    # 이름 → .mat 경로
+
+holders = [r for r in rows if r['n_ocular'] >= 1]
+for r in holders:                                    # 길이(초) 채우기
+    arr = load_subject(path_of[r['name']])
+    r['dur'] = arr.shape[0] / SFREQ
+holders.sort(key=lambda r: (r['grp'], -r['max_eye']))  # 집단별, 확률 높은 순
+
+print(f'\n[안구 IC 보유 {len(holders)}명 — 대표 선정용 명단]')
+print(f'{"이름":<8}{"그룹":<9}{"안구IC":>6}{"top-1 eye":>11}{"길이(s)":>9}')
+print('-' * 43)
+for r in holders:
+    print(f'{r["name"]:<8}{r["grp"]:<9}{r["n_ocular"]:>6}'
+          f'{r["max_eye"]:>11.2f}{r["dur"]:>9.1f}')
