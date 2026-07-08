@@ -4,3 +4,4 @@ __pycache__/
 .vscode/
 *.mat
 exploration/_cache/
+results/*.csv
