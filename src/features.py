@@ -141,6 +141,22 @@ def ocular_power_features(name, path, label):
             'eye_prob': eye_prob, 'feats': feats}
 
 
+def variability_from_ratios(ratios):
+    """에폭별 파워비율(1D) → 시간 변동성 (cv, succ_diff). 사람당 1세트.
+
+    ADHD의 순간 요동 가설을 겨냥한 event-free 변동성. 사건(깜빡임) 검출 없이
+    이미 뽑은 파워비율의 시간적 흩어짐을 잰다(탐지 문제 우회, 전원 값 있음).
+      - cv        : std/mean. 전체적 흩어짐(척도 불변).
+      - succ_diff : 이웃 에폭 간 |변화|의 평균. 순간순간 급변(moment-to-moment).
+    z-정규화는 분류 단계 scaler가 하므로 succ_diff를 mean으로 안 나눠도 됨.
+    """
+    r = np.asarray(ratios, float).ravel()
+    mean = r.mean()
+    cv = float(r.std() / mean) if mean > 0 else 0.0
+    succ = float(np.mean(np.abs(np.diff(r)))) if len(r) > 1 else 0.0
+    return cv, succ
+
+
 # ══ 뇌파(back-projection → 부위별 밴드파워) ════════════════
 def neural_feature_vector(epoch_data, fs=SFREQ):
     """복원된 (19채널 × 시간) 에폭 하나 → 뇌파 특징 25개.
@@ -208,17 +224,24 @@ def run_ocular(subjects):
         if not r['eligible']:
             continue
         n_ok += 1
-        rows += [(path.stem, int(r['label']), float(e[0])) for e in r['feats']]
+        # 변동성(cv·succ_diff)은 사람당 1세트 → 그 사람 모든 에폭에 복제.
+        # subject-wise CV라 복제가 누수를 만들지 않음(같은 사람은 한 fold에만).
+        cv, succ = variability_from_ratios(r['feats'][:, 0])
+        rows += [(path.stem, int(r['label']), float(e[0]), cv, succ) for e in r['feats']]
 
     _RESULTS.mkdir(parents=True, exist_ok=True)
     with open(_OCULAR_CSV, 'w', newline='') as fh:
         w = csv.writer(fh)
-        w.writerow(['subject_id', 'label', 'ocular_power_ratio'])
+        w.writerow(['subject_id', 'label', 'ocular_power_ratio', 'ocular_cv', 'ocular_succ_diff'])
         w.writerows(rows)
 
     vals = np.array([r[2] for r in rows]) if rows else np.array([])
+    cvs = np.array([r[3] for r in rows]) if rows else np.array([])
+    succs = np.array([r[4] for r in rows]) if rows else np.array([])
     print(f'\n[안구 검증]  ocular {n_ok}명(84 기대) · 에폭 {len(rows)} · '
-          f'NaN {int(np.isnan(vals).sum())} · 비율 {vals.min():.3f}~{vals.max():.3f}')
+          f'NaN {int(np.isnan(vals).sum())}')
+    print(f'  파워비율 {vals.min():.3f}~{vals.max():.3f} · '
+          f'cv {cvs.min():.3f}~{cvs.max():.3f} · succ_diff {succs.min():.3f}~{succs.max():.3f}')
     print(f'  저장: {_OCULAR_CSV}\n')
 
 

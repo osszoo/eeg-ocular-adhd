@@ -91,14 +91,14 @@ def assemble(oc_header, oc_rows, ne_header, ne_rows):
     ne84_rows = [row for s in subj84 if s in ne_by for row in ne_by[s]]
     outputs['neural84'] = (ne_header, ne84_rows)
 
-    # combined84 = 84명, 뇌파 25 + 안구 1 (순서 신뢰 결합). errors 없을 때만.
+    # combined84 = 84명, 뇌파 25 + 안구 전체특징 (순서 신뢰 결합). errors 없을 때만.
     if not errors:
-        oc_feat_col = oc_header[2]                       # 'ocular_power_ratio'
-        comb_header = ne_header + [oc_feat_col]
+        oc_feat_cols = oc_header[2:]                      # 안구 특징 전체(power·cv·succ_diff…)
+        comb_header = ne_header + oc_feat_cols
         comb_rows = []
         for s in subj84:
             for ne_row, oc_row in zip(ne_by[s], oc_by[s]):
-                comb_rows.append(ne_row + [oc_row[2]])   # 뇌파행 + 안구값
+                comb_rows.append(ne_row + oc_row[2:])    # 뇌파행 + 안구 특징 전체
         outputs['combined84'] = (comb_header, comb_rows)
 
     report = {'errors': errors, 'subj84': len(subj84), 'subj121': len(ne_by)}
@@ -167,4 +167,7 @@ if __name__ == '__main__':
               f'{"✓" if n_oc == n_ne84 == n_comb else "✗ 불일치"}')
         print(f'  뇌파121 총행: {n_ne121} (= 뇌파84 {n_ne84} + 나머지 {n_ne121 - n_ne84})')
         comb_cols = len(outputs['combined84'][0])
-        print(f'  combined 열수: {comb_cols} (기대 28 = subject_id+label+뇌파25+안구1)')
+        n_neural = len(outputs['neural84'][0]) - 2
+        n_ocular = len(outputs['ocular84'][0]) - 2
+        print(f'  combined 열수: {comb_cols} '
+              f'(기대 {2 + n_neural + n_ocular} = subject_id+label+뇌파{n_neural}+안구{n_ocular})')
