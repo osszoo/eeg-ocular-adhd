@@ -6,7 +6,11 @@
   3. ASR           (asr)       : 큰 진폭 버스트 아티팩트를 부분공간 재구성으로 정리
   4. ICA           (ica)       : extended Infomax로 IC 분해(피험자별 rank만큼)
 
-이후 단계 ICLabel는 이 파일에 추가 예정.
+이후 단계 ICLabel는 features.py에 추가.
+① 역할 분리
+preprocess.py는 "전처리 전용" (bandpass→ICA). ICLabel은 전처리가 끝난 IC를 판정하는 단계라 성격이 달라. 한 파일에 섞으면 "전처리 파이프라인"이라는 정체성이 흐려짐.
+② features.py가 특징추출의 단일 출처
+뇌파·안구·rate류까지 앞으로 추가될 모든 특징이 features.py에 올라오는 구조. ICLabel 라벨링은 그 첫 번째 단계 (IC를 골라내는 관문) 라 여기 포함이 맞음.
 """
 from pathlib import Path
 import mne
@@ -109,3 +113,4 @@ if __name__ == '__main__':
           round(cleaned.n_times / cleaned.info['sfreq'], 1), '초')
     ic = ica(cleaned)
     print('ICA 통과: n_components(=ASR 후 rank) =', ic.n_components_)
+    
