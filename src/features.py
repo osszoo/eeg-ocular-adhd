@@ -65,7 +65,7 @@ REGION_IDX = {r: [CH.index(c) for c in chs] for r, chs in REGIONS.items()}
 # 뇌파 특징 열 이름(고정 순서): 부위마다 δθαβ 상대파워 4개 + TBR 1개.
 NEURAL_COLS = []
 for _r in REGIONS:
-    NEURAL_COLS += [f'{_r}_{_b}' for _b in BAND_NAMES] + [f'{_r}_tbr']
+    NEURAL_COLS += [f'{_r}_{_b}_clr' for _b in BAND_NAMES] + [f'{_r}_tbr']
 
 _ROOT = Path(__file__).resolve().parent.parent
 _CACHE = _ROOT / 'exploration' / '_cache'
@@ -158,6 +158,13 @@ def variability_from_ratios(ratios):
 
 
 # ══ 뇌파(back-projection → 부위별 밴드파워) ════════════════
+def clr(x):
+    """centered log-ratio: hap=1 simplex -> hap=0. clip+log, geometric mean 차감."""
+    x = np.clip(np.asarray(x, float), 1e-12, None)
+    logx = np.log(x)
+    return logx - logx.mean()
+
+
 def neural_feature_vector(epoch_data, fs=SFREQ):
     """복원된 (19채널 × 시간) 에폭 하나 → 뇌파 특징 25개.
 
@@ -176,7 +183,7 @@ def neural_feature_vector(epoch_data, fs=SFREQ):
         region_bp = chan_bp[idx].mean(axis=0)      # (4,) 부위 평균 절대파워
         rel = region_bp / region_bp.sum()          # 4대역합으로 상대화 → 합=1
         tbr = region_bp[THETA_I] / region_bp[BETA_I]
-        feats.extend(rel.tolist())
+        feats.extend(clr(rel).tolist())
         feats.append(tbr)
     return np.array(feats)                          # (25,)
 
@@ -271,7 +278,7 @@ def run_neural(subjects):
     if len(arr):
         for ri, rname in enumerate(REGIONS):
             s = arr[:, ri * 5:ri * 5 + 4].sum(axis=1)   # 그 부위 상대파워 4개 합
-            print(f'  {rname:<9} 상대합 {s.min():.3f}~{s.max():.3f}(1 기대) · '
+            print(f'  {rname:<9} CLR합 {s.min():.3f}~{s.max():.3f}(0 기대) · '
                   f'TBR {arr[:, ri*5+4].min():.2f}~{arr[:, ri*5+4].max():.2f}')
         print(f'  brain IC 개수: 최소 {min(n_brains)} · 최대 {max(n_brains)} · '
               f'평균 {np.mean(n_brains):.1f}')
