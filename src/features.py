@@ -152,7 +152,7 @@ def variability_from_ratios(ratios):
     """
     r = np.asarray(ratios, float).ravel()
     mean = r.mean()
-    cv = float(r.std() / mean) if mean > 0 else 0.0
+    cv = float(r.std(ddof=1) / mean) if (mean > 0 and len(r) > 1) else 0.0
     succ = float(np.mean(np.abs(np.diff(r)))) if len(r) > 1 else 0.0
     return cv, succ
 
