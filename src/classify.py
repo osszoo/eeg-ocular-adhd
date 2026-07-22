@@ -37,6 +37,12 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.metrics import roc_auc_score
 
+# stdout을 UTF-8로 고정 — 파이프/리다이렉트 시 cp949 인코딩 크래시 방지(계측)
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+except (AttributeError, ValueError):
+    pass
+
 _ROOT = Path(__file__).resolve().parent.parent
 _RESULTS = _ROOT / 'results'
 K = 5
@@ -127,8 +133,37 @@ def ms(a):
     return f'{np.nanmean(a):.3f}±{np.nanstd(a):.3f}'
 
 
+class _Tee:
+    """print 출력을 콘솔과 파일에 동시에 흘려보냄(결과 저장·계측)."""
+    encoding = 'utf-8'
+
+    def __init__(self, *streams):
+        self.streams = streams
+
+    def write(self, s):
+        for st in self.streams:
+            try:
+                st.write(s)
+            except (ValueError, OSError):
+                pass
+
+    def flush(self):
+        for st in self.streams:
+            try:
+                st.flush()
+            except (ValueError, OSError):
+                pass
+
+
 # ══════════════════════════════════════════════════════════
 if __name__ == '__main__':
+    # 결과를 콘솔에 띄우면서 동시에 파일로 저장(교정 결과 기록)
+    _OUT_DIR = _RESULTS / 'corrected'
+    _OUT_DIR.mkdir(parents=True, exist_ok=True)
+    _out_fh = open(_OUT_DIR / 'classify_corrected.txt', 'w', encoding='utf-8')
+    _orig_stdout = sys.stdout
+    sys.stdout = _Tee(_orig_stdout, _out_fh)
+
     data = {c: load_xy(p) for c, p in CONDITIONS.items()}
 
     # 84 조건 3개는 같은 사람·같은 순서 → 같은 fold 공유(짝비교 성립) 확인
@@ -137,7 +172,7 @@ if __name__ == '__main__':
         assert np.array_equal(data[c][2], g_ref) and np.array_equal(data[c][1], y_ref), \
             f'{c}의 subject_id/label이 neural84와 불일치 — 조립 정렬 확인 필요'
 
-    sgkf = StratifiedGroupKFold(n_splits=K)
+    sgkf = StratifiedGroupKFold(n_splits=K, shuffle=True, random_state=RANDOM_STATE)
     splits84 = list(sgkf.split(np.zeros(len(y_ref)), y_ref, g_ref))
     X121, y121, g121, _ = data['neural121']
     splits121 = list(sgkf.split(np.zeros(len(y121)), y121, g121))
@@ -182,3 +217,6 @@ if __name__ == '__main__':
               '체리피킹 없이 정직하게 보고할 것(안구가 뇌파와 중복이거나 약함).')
     print('\n  * neural121은 84명과 사람이 달라 직접 대결 대상 아님(참고용 baseline).')
     print('  * 84명·5-fold라 p값보다 일관성 패턴으로 논증(설계 확정).')
+
+    sys.stdout = _orig_stdout
+    _out_fh.close()
