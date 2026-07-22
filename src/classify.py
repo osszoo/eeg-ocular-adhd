@@ -64,15 +64,17 @@ def make_classifiers():
             ('sc', StandardScaler()),
             ('clf', RandomForestClassifier(
                 n_estimators=300, max_features='sqrt', min_samples_leaf=2,
-                random_state=RANDOM_STATE))]),
+                random_state=RANDOM_STATE, class_weight='balanced'))]),
         'Logistic': lambda: Pipeline([
             ('sc', StandardScaler()),
             ('clf', LogisticRegression(
-                penalty='l2', C=1.0, max_iter=1000, random_state=RANDOM_STATE))]),
+                penalty='l2', C=1.0, max_iter=1000, random_state=RANDOM_STATE,
+                class_weight='balanced'))]),
         'SVM-RBF': lambda: Pipeline([
             ('sc', StandardScaler()),
             ('clf', SVC(kernel='rbf', C=1.0, gamma='scale',
-                        probability=True, random_state=RANDOM_STATE))]),
+                        probability=True, random_state=RANDOM_STATE,
+                        class_weight='balanced'))]),
     }
 
 
