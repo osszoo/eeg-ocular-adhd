@@ -6,7 +6,7 @@ measured on    : loaded Raw, before bandpass and before CAR
 detrend        : pyprep internal 1 Hz highpass
 thresholds     : flat 1e-15 | corr 0.4 / 1s / 1% | hf z>5 | dev z>5
 ransac         : OFF (19 channels: 25% subset is 4-5 predictors)
-tier1          : nan U flat U dropout U correlation U hf_noise
+tier1          : nan U flat U dropout U hf_noise
 tier2 (PRIMARY): tier1 U deviation
 subjects       : 121
 
@@ -132,7 +132,7 @@ subjects       : 121
   [119/121] v308     Control  133.0s  corr:F7,P7,P8
   [120/121] v309     Control  193.9s  corr:P4,O2,F7,P7,P8 | devi:P4
   [121/121] v310     Control  139.0s  corr:C4,F7
-  elapsed 0.4 min
+  elapsed 0.3 min
 
 --- flag counts: channel x criterion ----------------------------------------
   ch             nan        flat     dropout correlation    hf_noise   deviation
@@ -167,30 +167,42 @@ subjects       : 121
   (reported for construct validity only; the rule is not changed by it)
 
 --- bad channels per subject ------------------------------------------------
-  tier1  0 ch: 11  1 ch: 10  2 ch: 21  3 ch: 16  4 ch: 19  5 ch: 22  6 ch: 9  7 ch: 6  8 ch: 5  9 ch: 2
-  tier2  0 ch: 10  1 ch: 11  2 ch: 21  3 ch: 16  4 ch: 17  5 ch: 24  6 ch: 8  7 ch: 7  8 ch: 5  9 ch: 2
+  tier1  0 ch: 91  1 ch: 22  2 ch: 8
+  tier2  0 ch: 86  1 ch: 27  2 ch: 8
+  prereg81 0 ch: 10  1 ch: 11  2 ch: 21  3 ch: 16  4 ch: 17  5 ch: 24  6 ch: 8  7 ch: 7  8 ch: 5  9 ch: 2
 
---- samples -----------------------------------------------------------------
+--- samples: every rung is always reported ----------------------------------
   full    keep 121 (ADHD 61 / Control 60)   exclude   0
           exclusion rate  ADHD  0.0%  Control  0.0%  gap  0.0%p
           length median   ADHD  143.7s  Control  122.1s  delta  +21.6s
-  tier1   keep  11 (ADHD  8 / Control  3)   exclude 110
-          exclusion rate  ADHD 86.9%  Control 95.0%  gap  8.1%p
-          length median   ADHD  131.6s  Control  129.3s  delta   +2.3s
-  tier2   keep  10 (ADHD  8 / Control  2)   exclude 111
+  tier1   keep  91 (ADHD 46 / Control 45)   exclude  30
+          exclusion rate  ADHD 24.6%  Control 25.0%  gap  0.4%p
+          length median   ADHD  142.8s  Control  125.3s  delta  +17.5s
+  tier2   keep  86 (ADHD 45 / Control 41)   exclude  35
+          exclusion rate  ADHD 26.2%  Control 31.7%  gap  5.4%p
+          length median   ADHD  143.7s  Control  125.3s  delta  +18.3s
+  prereg81  keep  10 (ADHD  8 / Control  2)   exclude 111
           exclusion rate  ADHD 86.9%  Control 96.7%  gap  9.8%p
           length median   ADHD  131.6s  Control  129.8s  delta   +1.8s
+  primary  = tier2
+  prereg81 = the rule as first declared; invalidated by PREREG 8.2
+
+  reference rung (deviation alone, no hf_noise):
+  devonly  keep 106 (ADHD 57 / Control 49)   exclude  15
+          exclusion rate  ADHD  6.6%  Control 18.3%  gap 11.8%p
+          length median   ADHD  143.7s  Control  122.3s  delta  +21.4s
 
 --- intersection with the ocular-IC roster (84 subjects) --------------------
   full    84 subjects (ADHD 44 / Control 40)
-  tier1    7 subjects (ADHD  5 / Control  2)
-  tier2    6 subjects (ADHD  5 / Control  1)
+  tier1   63 subjects (ADHD 32 / Control 31)
+  tier2   59 subjects (ADHD 31 / Control 28)
+  prereg81   6 subjects (ADHD  5 / Control  1)
   -> this is the sample the pre-registered primary contrast runs on
 
 --- external cross-check: v56p ----------------------------------------------
   v56p  corr:T8,P8
-  tier1 bad: ['T8', 'P8']
-  tier2 bad: ['T8', 'P8']
+  tier1 bad: none
+  tier2 bad: none
   (Pastrana-Cortes et al. dropped this subject for FP1/FP2 contamination)
 
 --- written -----------------------------------------------------------------
