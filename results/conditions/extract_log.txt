@@ -1,0 +1,197 @@
+==============================================================================
+STAGE 4 -- per-condition feature extraction (PREREG 8.3 / 8.3.1)
+==============================================================================
+subjects   : 121
+conditions : 19  (i_brain, ii_eye1, ii_eyeall, ii_c1, ii_c2, ii_c3, ii_c4, ii_c5, ii_m1, ii_m2, ii_m3, ii_m4, ii_m5, ii_s1, ii_s2, ii_s3, iii_noica, iv_noasr, v_wideband)
+features   : 306 per epoch, epoch 6s, definitions frozen at features-v1
+cache      : C:\Users\사용자\Desktop\EEG data for ADHD -   Control children\exploration\_cache
+
+[  1/121] v10p     eye=1 cand=3 epochs=18 conds=19 cache    0.0s
+[  2/121] v12p     eye=1 cand=5 epochs=22 conds=19 cache    0.1s
+[  3/121] v14p     eye=1 cand=4 epochs=22 conds=19 cache    0.1s
+[  4/121] v15p     eye=1 cand=3 epochs=56 conds=19 cache    0.2s
+[  5/121] v173     eye=0 cand=4 epochs=31 conds=9 cache    0.3s
+[  6/121] v18p     eye=1 cand=7 epochs=32 conds=19 ICA     44.0s
+[  7/121] v19p     eye=1 cand=7 epochs=30 conds=19 ICA     84.8s
+[  8/121] v1p      eye=2 cand=5 epochs=15 conds=19 ICA    105.7s
+[  9/121] v20p     eye=1 cand=3 epochs=46 conds=19 ICA    165.4s
+[ 10/121] v21p     eye=1 cand=2 epochs=21 conds=19 ICA    193.7s
+[ 11/121] v22p     eye=0 cand=4 epochs=15 conds=9 ICA    204.2s
+[ 12/121] v24p     eye=1 cand=5 epochs=21 conds=19 ICA    232.3s
+[ 13/121] v25p     eye=1 cand=6 epochs=12 conds=19 ICA    250.4s
+[ 14/121] v27p     eye=1 cand=7 epochs=37 conds=19 ICA    299.1s
+[ 15/121] v28p     eye=1 cand=3 epochs=35 conds=19 ICA    343.6s
+[ 16/121] v29p     eye=3 cand=3 epochs=31 conds=19 ICA    387.9s
+[ 17/121] v30p     eye=2 cand=4 epochs=28 conds=19 ICA    425.3s
+[ 18/121] v31p     eye=0 cand=3 epochs=15 conds=9 ICA    436.2s
+[ 19/121] v32p     eye=1 cand=3 epochs=23 conds=19 ICA    465.9s
+[ 20/121] v33p     eye=1 cand=3 epochs=38 conds=19 ICA    515.9s
+[ 21/121] v34p     eye=1 cand=6 epochs=25 conds=19 ICA    548.8s
+[ 22/121] v35p     eye=0 cand=7 epochs=19 conds=9 ICA    561.9s
+[ 23/121] v36p     eye=1 cand=3 epochs=22 conds=19 ICA    590.2s
+[ 24/121] v37p     eye=0 cand=4 epochs=12 conds=9 ICA    598.9s
+[ 25/121] v38p     eye=2 cand=3 epochs=32 conds=19 ICA    643.0s
+[ 26/121] v39p     eye=0 cand=5 epochs=23 conds=9 ICA    659.0s
+[ 27/121] v3p      eye=1 cand=2 epochs=43 conds=19 ICA    714.8s
+[ 28/121] v40p     eye=1 cand=2 epochs=26 conds=19 ICA    751.4s
+[ 29/121] v6p      eye=0 cand=6 epochs=22 conds=9 ICA    768.5s
+[ 30/121] v8p      eye=1 cand=4 epochs=20 conds=19 ICA    794.7s
+[ 31/121] v177     eye=2 cand=2 epochs=21 conds=19 ICA    822.5s
+[ 32/121] v179     eye=2 cand=2 epochs=16 conds=19 ICA    843.2s
+[ 33/121] v181     eye=1 cand=5 epochs=13 conds=19 ICA    861.0s
+[ 34/121] v183     eye=1 cand=4 epochs=24 conds=19 ICA    893.5s
+[ 35/121] v190     eye=0 cand=4 epochs=20 conds=9 ICA    907.9s
+[ 36/121] v196     eye=1 cand=3 epochs=17 conds=19 ICA    930.6s
+[ 37/121] v198     eye=1 cand=4 epochs=25 conds=19 ICA    963.2s
+[ 38/121] v200     eye=1 cand=4 epochs=16 conds=19 ICA    984.3s
+[ 39/121] v204     eye=1 cand=3 epochs=26 conds=19 ICA   1017.9s
+[ 40/121] v206     eye=2 cand=3 epochs=26 conds=19 ICA   1056.9s
+[ 41/121] v209     eye=3 cand=2 epochs=39 conds=19 ICA   1108.1s
+[ 42/121] v213     eye=0 cand=3 epochs=16 conds=9 ICA   1120.0s
+[ 43/121] v215     eye=0 cand=6 epochs=27 conds=9 ICA   1138.6s
+[ 44/121] v219     eye=0 cand=1 epochs=35 conds=9 ICA   1160.9s
+[ 45/121] v227     eye=0 cand=4 epochs=36 conds=9 ICA   1184.7s
+[ 46/121] v231     eye=3 cand=2 epochs=25 conds=19 ICA   1218.1s
+[ 47/121] v234     eye=1 cand=6 epochs=44 conds=19 ICA   1274.2s
+[ 48/121] v236     eye=1 cand=7 epochs=17 conds=19 ICA   1299.1s
+[ 49/121] v238     eye=2 cand=3 epochs=12 conds=19 ICA   1315.7s
+[ 50/121] v244     eye=1 cand=4 epochs=50 conds=19 ICA   1379.5s
+[ 51/121] v246     eye=0 cand=6 epochs=27 conds=9 ICA   1397.7s
+[ 52/121] v250     eye=2 cand=4 epochs=18 conds=19 ICA   1422.0s
+[ 53/121] v254     eye=1 cand=6 epochs=13 conds=19 ICA   1440.3s
+[ 54/121] v263     eye=1 cand=1 epochs=24 conds=19 ICA   1473.7s
+[ 55/121] v265     eye=1 cand=7 epochs=23 conds=19 ICA   1504.1s
+[ 56/121] v270     eye=2 cand=6 epochs=30 conds=19 ICA   1543.1s
+[ 57/121] v274     eye=0 cand=8 epochs=22 conds=9 ICA   1558.3s
+[ 58/121] v279     eye=0 cand=6 epochs=26 conds=9 ICA   1575.6s
+[ 59/121] v284     eye=3 cand=2 epochs=20 conds=19 ICA   1602.9s
+[ 60/121] v286     eye=0 cand=9 epochs=14 conds=9 ICA   1613.0s
+[ 61/121] v288     eye=0 cand=7 epochs=26 conds=9 ICA   1631.2s
+[ 62/121] v107     eye=0 cand=3 epochs=25 conds=9 ICA   1648.9s
+[ 63/121] v108     eye=0 cand=5 epochs=24 conds=9 ICA   1665.9s
+[ 64/121] v109     eye=0 cand=6 epochs=20 conds=9 ICA   1680.4s
+[ 65/121] v110     eye=1 cand=4 epochs=21 conds=19 ICA   1707.7s
+[ 66/121] v111     eye=1 cand=3 epochs=19 conds=19 ICA   1733.1s
+[ 67/121] v112     eye=0 cand=3 epochs=20 conds=9 ICA   1747.6s
+[ 68/121] v113     eye=0 cand=3 epochs=20 conds=9 ICA   1761.6s
+[ 69/121] v114     eye=0 cand=7 epochs=17 conds=9 ICA   1774.0s
+[ 70/121] v115     eye=0 cand=8 epochs=20 conds=9 ICA   1788.1s
+[ 71/121] v116     eye=0 cand=5 epochs=25 conds=9 ICA   1805.8s
+[ 72/121] v41p     eye=1 cand=9 epochs=16 conds=19 ICA   1828.4s
+[ 73/121] v42p     eye=1 cand=8 epochs=21 conds=19 ICA   1860.7s
+[ 74/121] v43p     eye=1 cand=4 epochs=16 conds=19 ICA   1882.1s
+[ 75/121] v44p     eye=1 cand=6 epochs=14 conds=19 ICA   1901.0s
+[ 76/121] v45p     eye=1 cand=4 epochs=14 conds=19 ICA   1920.0s
+[ 77/121] v46p     eye=2 cand=2 epochs=12 conds=19 ICA   1937.0s
+[ 78/121] v47p     eye=1 cand=2 epochs=14 conds=19 ICA   1956.8s
+[ 79/121] v48p     eye=1 cand=7 epochs=13 conds=19 ICA   1975.2s
+[ 80/121] v49p     eye=1 cand=3 epochs=21 conds=19 ICA   2003.3s
+[ 81/121] v50p     eye=1 cand=4 epochs=21 conds=19 ICA   2031.6s
+[ 82/121] v51p     eye=0 cand=7 epochs=10 conds=9 ICA   2039.4s
+[ 83/121] v52p     eye=1 cand=3 epochs=18 conds=19 ICA   2063.4s
+[ 84/121] v53p     eye=0 cand=3 epochs=24 conds=9 ICA   2080.9s
+[ 85/121] v54p     eye=1 cand=3 epochs=25 conds=19 ICA   2120.6s
+[ 86/121] v55p     eye=1 cand=5 epochs=18 conds=19 ICA   2144.8s
+[ 87/121] v56p     eye=1 cand=4 epochs=18 conds=19 ICA   2169.7s
+[ 88/121] v57p     eye=1 cand=3 epochs=19 conds=19 ICA   2194.9s
+[ 89/121] v58p     eye=1 cand=2 epochs=18 conds=19 ICA   2218.6s
+[ 90/121] v59p     eye=1 cand=1 epochs=21 conds=19 ICA   2247.6s
+[ 91/121] v60p     eye=0 cand=7 epochs=16 conds=9 ICA   2259.8s
+[ 92/121] v117     eye=1 cand=8 epochs=33 conds=19 ICA   2303.1s
+[ 93/121] v118     eye=1 cand=6 epochs=15 conds=19 ICA   2323.0s
+[ 94/121] v120     eye=0 cand=4 epochs=15 conds=9 ICA   2335.0s
+[ 95/121] v121     eye=0 cand=9 epochs=21 conds=9 ICA   2349.3s
+[ 96/121] v123     eye=1 cand=5 epochs=18 conds=19 ICA   2373.2s
+[ 97/121] v125     eye=1 cand=6 epochs=20 conds=19 ICA   2399.4s
+[ 98/121] v127     eye=0 cand=5 epochs=19 conds=9 ICA   2412.5s
+[ 99/121] v129     eye=0 cand=10 epochs=14 conds=9 ICA   2423.0s
+[100/121] v131     eye=0 cand=12 epochs=21 conds=9 ICA   2437.6s
+[101/121] v133     eye=1 cand=6 epochs=19 conds=19 ICA   2462.3s
+[102/121] v134     eye=0 cand=9 epochs=17 conds=9 ICA   2474.3s
+[103/121] v138     eye=0 cand=7 epochs=16 conds=9 ICA   2487.3s
+[104/121] v140     eye=1 cand=4 epochs=22 conds=19 ICA   2516.7s
+[105/121] v143     eye=1 cand=2 epochs=20 conds=19 ICA   2545.2s
+[106/121] v147     eye=1 cand=6 epochs=18 conds=19 ICA   2570.2s
+[107/121] v149     eye=1 cand=8 epochs=22 conds=19 ICA   2604.9s
+[108/121] v151     eye=3 cand=5 epochs=27 conds=19 ICA   2640.6s
+[109/121] v297     eye=2 cand=6 epochs=17 conds=19 ICA   2663.2s
+[110/121] v298     eye=1 cand=7 epochs=23 conds=19 ICA   2693.0s
+[111/121] v299     eye=3 cand=3 epochs=28 conds=19 ICA   2731.8s
+[112/121] v300     eye=1 cand=1 epochs=33 conds=19 ICA   2779.2s
+[113/121] v302     eye=2 cand=2 epochs=23 conds=19 ICA   2810.8s
+[114/121] v303     eye=2 cand=5 epochs=25 conds=19 ICA   2843.0s
+[115/121] v304     eye=4 cand=3 epochs=17 conds=19 ICA   2866.2s
+[116/121] v305     eye=3 cand=4 epochs=29 conds=19 ICA   2904.4s
+[117/121] v306     eye=0 cand=4 epochs=23 conds=9 ICA   2920.0s
+[118/121] v307     eye=1 cand=4 epochs=29 conds=19 ICA   2958.4s
+[119/121] v308     eye=1 cand=5 epochs=22 conds=19 ICA   2987.6s
+[120/121] v309     eye=0 cand=5 epochs=32 conds=9 ICA   3010.4s
+[121/121] v310     eye=1 cand=5 epochs=23 conds=19 ICA   3041.8s
+
+------------------------------------------------------------------------------
+WRITTEN
+------------------------------------------------------------------------------
+  i_brain      subjects=121 epochs= 2761 NaN=0 Inf=0  features_i_brain.csv
+  ii_eye1      subjects= 84 epochs= 1976 NaN=0 Inf=0  features_ii_eye1.csv
+  ii_eyeall    subjects= 84 epochs= 1976 NaN=0 Inf=0  features_ii_eyeall.csv
+  ii_c1        subjects=121 epochs= 2761 NaN=0 Inf=0  features_ii_c1.csv
+  ii_c2        subjects=121 epochs= 2761 NaN=0 Inf=0  features_ii_c2.csv
+  ii_c3        subjects=121 epochs= 2761 NaN=0 Inf=0  features_ii_c3.csv
+  ii_c4        subjects=121 epochs= 2761 NaN=0 Inf=0  features_ii_c4.csv
+  ii_c5        subjects=121 epochs= 2761 NaN=0 Inf=0  features_ii_c5.csv
+  ii_m1        subjects= 84 epochs= 1976 NaN=0 Inf=0  features_ii_m1.csv
+  ii_m2        subjects= 84 epochs= 1976 NaN=0 Inf=0  features_ii_m2.csv
+  ii_m3        subjects= 84 epochs= 1976 NaN=0 Inf=0  features_ii_m3.csv
+  ii_m4        subjects= 84 epochs= 1976 NaN=0 Inf=0  features_ii_m4.csv
+  ii_m5        subjects= 84 epochs= 1976 NaN=0 Inf=0  features_ii_m5.csv
+  ii_s1        subjects= 84 epochs= 1976 NaN=0 Inf=0  features_ii_s1.csv
+  ii_s2        subjects= 84 epochs= 1976 NaN=0 Inf=0  features_ii_s2.csv
+  ii_s3        subjects= 84 epochs= 1976 NaN=0 Inf=0  features_ii_s3.csv
+  iii_noica    subjects=121 epochs= 2761 NaN=0 Inf=0  features_iii_noica.csv
+  iv_noasr     subjects=121 epochs= 2761 NaN=0 Inf=0  features_iv_noasr.csv
+  v_wideband   subjects=121 epochs= 2761 NaN=0 Inf=0  features_v_wideband.csv
+
+------------------------------------------------------------------------------
+DISTRIBUTIONS OVER ALL PROCESSED SUBJECTS
+------------------------------------------------------------------------------
+eye ICs per subject : 0:37  1:63  2+:21
+  -> ii_eyeall differs from ii_eye1 for 21 subject(s). If 0, the arm is
+     redundant and should be reported as such rather than interpreted.
+
+candidate control ICs: min 1  median 4  max 12   (subjects with <5: 66)
+  wrap-around reuse occurred for 66 subject(s)
+
+matching alpha (ii_m): median 1.84  p90 3.91  max 10.45   (alpha>5: 15 of 420)
+  -> high alpha means a residual IC was amplified to eye-IC scale.
+     ii_s (phase surrogate) needs no amplification and is unaffected.
+
+variance ratio vs i_brain (median over subjects)
+  i_brain       1.000   (n=121)
+  ii_eye1       1.224   (n=84)
+  ii_eyeall     1.270   (n=84)
+  ii_c1         1.097   (n=121)
+  ii_c2         1.073   (n=121)
+  ii_c3         1.050   (n=121)
+  ii_c4         1.052   (n=121)
+  ii_c5         1.060   (n=121)
+  ii_m1         1.224   (n=84)
+  ii_m2         1.226   (n=84)
+  ii_m3         1.225   (n=84)
+  ii_m4         1.224   (n=84)
+  ii_m5         1.224   (n=84)
+  ii_s1         1.225   (n=84)
+  ii_s2         1.222   (n=84)
+  ii_s3         1.227   (n=84)
+  iii_noica     1.659   (n=121)
+  iv_noasr      1.902   (n=121)
+  v_wideband    1.917   (n=121)
+
+ASR effect (iv_noasr - iii_noica): median +0.0789   inert (<0.001) for 38/121 subjects
+  -> at cutoff 100 ASR may be removing almost nothing; that is itself
+     a number to report, not a bug.
+
+40-60 Hz contribution (v_wideband - iv_noasr): median +0.0140 of i_brain variance
+  -> variance is not the whole story: Hjorth, fractal and entropy
+     features weight high frequencies far more than variance does.
+
+elapsed: 50.7 min
