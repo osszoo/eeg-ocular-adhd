@@ -1,0 +1,198 @@
+==============================================================================
+CHANNEL QUALITY SCREENING  --  pyprep NoisyChannels, PREP defaults
+==============================================================================
+pyprep version : 0.7.1
+measured on    : loaded Raw, before bandpass and before CAR
+detrend        : pyprep internal 1 Hz highpass
+thresholds     : flat 1e-15 | corr 0.4 / 1s / 1% | hf z>5 | dev z>5
+ransac         : OFF (19 channels: 25% subset is 4-5 predictors)
+tier1          : nan U flat U dropout U correlation U hf_noise
+tier2 (PRIMARY): tier1 U deviation
+subjects       : 121
+
+--- per subject -------------------------------------------------------------
+  [  1/121] v10p     ADHD     111.8s  corr:F7,T8
+  [  2/121] v12p     ADHD     137.5s  corr:Fp1,O1,T7,P7
+  [  3/121] v14p     ADHD     137.2s  corr:T7,T8,P7
+  [  4/121] v15p     ADHD     337.9s  corr:C4,O2,T8,P7,P8
+  [  5/121] v173     ADHD     189.4s  corr:P3,F7,F8,T8 | hf_n:F7
+  [  6/121] v18p     ADHD     195.3s  corr:C4,O2,F7,T8,P7,P8
+  [  7/121] v19p     ADHD     180.2s  corr:O2,P8,Fz | hf_n:Fz | devi:Fz
+  [  8/121] v1p      ADHD      95.8s  corr:Fp1,Fp2,F7,T7,T8,P7 | devi:O1
+  [  9/121] v20p     ADHD     276.0s  corr:O2,F8
+  [ 10/121] v21p     ADHD     129.5s  corr:P8 | hf_n:O1
+  [ 11/121] v22p     ADHD      94.5s  clean
+  [ 12/121] v24p     ADHD     128.0s  corr:Fp1 | hf_n:Pz
+  [ 13/121] v25p     ADHD      77.3s  clean
+  [ 14/121] v27p     ADHD     225.6s  corr:F7,T7,T8,P7,P8,Cz,Pz | hf_n:Cz,Pz
+  [ 15/121] v28p     ADHD     215.7s  corr:Fp1,Fp2
+  [ 16/121] v29p     ADHD     189.0s  corr:Fp2,F7,T8,P7,P8
+  [ 17/121] v30p     ADHD     169.2s  corr:P7,Cz
+  [ 18/121] v31p     ADHD      91.2s  clean
+  [ 19/121] v32p     ADHD     141.0s  corr:O2,P8
+  [ 20/121] v33p     ADHD     228.3s  corr:O1
+  [ 21/121] v34p     ADHD     152.8s  clean
+  [ 22/121] v35p     ADHD     119.6s  clean
+  [ 23/121] v36p     ADHD     135.9s  corr:O1
+  [ 24/121] v37p     ADHD      72.5s  corr:C4,O1,O2,F8,P8
+  [ 25/121] v38p     ADHD     192.9s  corr:O1,O2,P7,P8 | hf_n:F7
+  [ 26/121] v39p     ADHD     142.0s  corr:O1,P7
+  [ 27/121] v3p      ADHD     262.3s  corr:Fp2,T7,P7
+  [ 28/121] v40p     ADHD     157.0s  corr:O2,P8
+  [ 29/121] v6p      ADHD     137.2s  corr:Fp1,Fp2,T7,P7,P8
+  [ 30/121] v8p      ADHD     123.2s  corr:O1,T8,P7,P8 | hf_n:O1 | devi:O1
+  [ 31/121] v177     ADHD     130.4s  corr:F7,F8
+  [ 32/121] v179     ADHD      99.0s  corr:F8,T8,P8
+  [ 33/121] v181     ADHD      83.3s  corr:O1,F7,F8,T7,P7,P8 | hf_n:Pz
+  [ 34/121] v183     ADHD     145.2s  corr:F7,F8,T8,P8
+  [ 35/121] v190     ADHD     120.8s  corr:F8,P7,Pz
+  [ 36/121] v196     ADHD     104.6s  corr:O2,F7,F8,T8,P8 | hf_n:Fz
+  [ 37/121] v198     ADHD     153.3s  corr:T8,P7,P8
+  [ 38/121] v200     ADHD      99.5s  corr:F3,F7,F8
+  [ 39/121] v204     ADHD     159.8s  corr:O2,F7,F8,T8,P8 | hf_n:F7 | devi:F7
+  [ 40/121] v206     ADHD     157.6s  corr:Fp2,O1,O2,F7,F8,T8,P8 | hf_n:P7
+  [ 41/121] v209     ADHD     236.5s  corr:Fp2,O1,F8
+  [ 42/121] v213     ADHD      96.5s  corr:C4,F8,T8
+  [ 43/121] v215     ADHD     167.0s  corr:O1,F7,F8,T7,P7
+  [ 44/121] v219     ADHD     212.2s  corr:F7,F8,P8
+  [ 45/121] v227     ADHD     219.4s  corr:C3,T7,T8,P8,Fz
+  [ 46/121] v231     ADHD     154.0s  corr:Fp2,F7,F8,T7,P8 | hf_n:T7
+  [ 47/121] v234     ADHD     267.1s  corr:F7,F8,T8,P7,P8 | hf_n:P8
+  [ 48/121] v236     ADHD     105.5s  corr:P7
+  [ 49/121] v238     ADHD      77.0s  corr:O1,O2,F7,F8,P7,P8,Pz
+  [ 50/121] v244     ADHD     304.9s  clean
+  [ 51/121] v246     ADHD     166.5s  corr:Fp2
+  [ 52/121] v250     ADHD     108.2s  corr:Fp2,P8
+  [ 53/121] v254     ADHD      81.9s  corr:C3,O1,Cz,Pz
+  [ 54/121] v263     ADHD     145.8s  clean
+  [ 55/121] v265     ADHD     143.7s  clean
+  [ 56/121] v270     ADHD     185.0s  corr:O1,F7,F8,T8,P7
+  [ 57/121] v274     ADHD     135.3s  corr:Fp2,F8 | hf_n:F7,T7
+  [ 58/121] v279     ADHD     157.3s  corr:C4,P4,O2,T8,P8
+  [ 59/121] v284     ADHD     120.2s  corr:F7,F8,T7,P7,P8
+  [ 60/121] v286     ADHD      89.6s  corr:Fp2,O1,O2,F7,F8,T8,P7,P8,Cz | hf_n:O1
+  [ 61/121] v288     ADHD     157.1s  corr:O1,P7,P8
+  [ 62/121] v107     Control  154.6s  corr:P8
+  [ 63/121] v108     Control  148.6s  corr:F7,T8,P7,P8
+  [ 64/121] v109     Control  125.3s  clean
+  [ 65/121] v110     Control  129.3s  devi:Fp2
+  [ 66/121] v111     Control  119.6s  corr:O1,O2,P7,P8
+  [ 67/121] v112     Control  124.6s  corr:F7,P8,Cz | hf_n:F4
+  [ 68/121] v113     Control  121.7s  corr:P7,P8
+  [ 69/121] v114     Control  103.9s  corr:P3,F7,F8,T7,T8
+  [ 70/121] v115     Control  122.3s  corr:O2,T8,P8,Pz
+  [ 71/121] v116     Control  150.8s  corr:P4,O2,F8,P8
+  [ 72/121] v41p     Control   97.7s  corr:Fp1,F7,F8,T7,P7,P8
+  [ 73/121] v42p     Control  130.5s  corr:Fp1,F3,O1,Pz
+  [ 74/121] v43p     Control   99.6s  corr:Fp1,O2,F8,T8,P7,P8,Fz | hf_n:O2,F7
+  [ 75/121] v44p     Control   89.0s  corr:O1,F7,F8,T7,P7,P8
+  [ 76/121] v45p     Control   84.9s  corr:C4,O1,O2,F8,T7,T8,P7,Fz
+  [ 77/121] v46p     Control   76.7s  corr:Fp1,Fp2,O1,O2,T8,P7 | hf_n:Fp2 | devi:Fp2
+  [ 78/121] v47p     Control   84.9s  corr:P4,F8,T7,T8
+  [ 79/121] v48p     Control   81.7s  corr:O1,F8,T8,P7,P8
+  [ 80/121] v49p     Control  131.0s  corr:O1,F8,T7,P7,P8
+  [ 81/121] v50p     Control  126.9s  corr:C3,O1,F8,T7,T8,P7,P8
+  [ 82/121] v51p     Control   62.4s  corr:T8,P8,Cz
+  [ 83/121] v52p     Control  108.5s  corr:F7
+  [ 84/121] v53p     Control  149.4s  corr:Fp2,F8,P8,Cz
+  [ 85/121] v54p     Control  150.3s  corr:Fp1,O1,F7,Pz
+  [ 86/121] v55p     Control  111.6s  corr:F7,T7,T8,P7,P8
+  [ 87/121] v56p     Control  110.5s  corr:T8,P8
+  [ 88/121] v57p     Control  114.8s  corr:P7,Cz | hf_n:Cz | devi:Cz
+  [ 89/121] v58p     Control  108.7s  corr:F8,T7
+  [ 90/121] v59p     Control  129.0s  corr:Fp1,O2,P7,P8,Pz | hf_n:Fp1,P7 | devi:Fp1
+  [ 91/121] v60p     Control  101.0s  corr:C4
+  [ 92/121] v117     Control  200.5s  corr:T7,P8
+  [ 93/121] v118     Control   93.8s  corr:O2,P8
+  [ 94/121] v120     Control   94.0s  corr:F3,T8 | hf_n:Fz | devi:Fz
+  [ 95/121] v121     Control  127.9s  corr:F8,T7
+  [ 96/121] v123     Control  113.7s  corr:F7,T7,T8,P7
+  [ 97/121] v125     Control  120.1s  corr:Fp1,F8,T8,P8 | devi:O1
+  [ 98/121] v127     Control  115.0s  corr:Fp2,O2,F7,F8,T8,P8 | hf_n:O2
+  [ 99/121] v129     Control   87.6s  corr:P7 | hf_n:F8
+  [100/121] v131     Control  130.4s  corr:Fp2,P4,O1,O2,T8,P8 | hf_n:Cz
+  [101/121] v133     Control  117.8s  corr:Fp1,O1,F7,T7,T8,P7,P8 | hf_n:F4,Cz
+  [102/121] v134     Control  104.4s  corr:Fp2,O2,T7,P7,P8,Fz
+  [103/121] v138     Control   97.6s  corr:P3,O2,P8,Pz | hf_n:P4
+  [104/121] v140     Control  134.3s  clean
+  [105/121] v143     Control  121.9s  corr:T8,P8
+  [106/121] v147     Control  111.0s  corr:P7
+  [107/121] v149     Control  133.6s  corr:Cz
+  [108/121] v151     Control  163.4s  corr:O2,F8,T8,P7,P8 | hf_n:P3,P4
+  [109/121] v297     Control  107.0s  corr:Fp1,O1,F7,P8 | hf_n:Fz | devi:Fz
+  [110/121] v298     Control  138.9s  corr:F8,P7,Cz,Pz
+  [111/121] v299     Control  173.9s  corr:O1,O2,F7,F8,P7,P8,Cz,Pz
+  [112/121] v300     Control  203.0s  corr:C4,P7,P8,Pz | hf_n:Cz,Pz | devi:Pz
+  [113/121] v302     Control  139.4s  corr:P3,O1,P8
+  [114/121] v303     Control  150.2s  corr:O1,F7,F8,T7,P7,P8,Pz | hf_n:T7,Fz | devi:Fz
+  [115/121] v304     Control  104.7s  corr:F7,F8,P7,P8 | devi:Fz
+  [116/121] v305     Control  174.0s  corr:C3,O1,F7,F8,T8,P8
+  [117/121] v306     Control  143.0s  corr:T7
+  [118/121] v307     Control  178.2s  corr:P4,F7,F8
+  [119/121] v308     Control  133.0s  corr:F7,P7,P8
+  [120/121] v309     Control  193.9s  corr:P4,O2,F7,P7,P8 | devi:P4
+  [121/121] v310     Control  139.0s  corr:C4,F7
+  elapsed 0.4 min
+
+--- flag counts: channel x criterion ----------------------------------------
+  ch             nan        flat     dropout correlation    hf_noise   deviation
+  Fp1              0           0           0          14           1           1 <- frontal
+  Fp2              0           0           0          17           1           2 <- frontal
+  F3               0           0           0           3           0           0
+  F4               0           0           0           0           2           0
+  C3               0           0           0           4           0           0
+  C4               0           0           0           9           0           0
+  P3               0           0           0           4           1           0
+  P4               0           0           0           6           2           1
+  O1               0           0           0          32           3           3
+  O2               0           0           0          29           2           0
+  F7               0           0           0          41           5           1 <- frontal
+  F8               0           0           0          45           1           0 <- frontal
+  T7               0           0           0          27           3           0
+  T8               0           0           0          42           0           0
+  P7               0           0           0          51           2           0
+  P8               0           0           0          66           1           0
+  Fz               0           0           0           5           5           5
+  Cz               0           0           0          11           5           1
+  Pz               0           0           0          13           4           1
+
+--- frontal vs non-frontal flag rate (per channel-subject) -------------------
+  criterion       frontal  non-frontal    ratio
+  nan               0.00%        0.00%      inf
+  flat              0.00%        0.00%      inf
+  dropout           0.00%        0.00%      inf
+  correlation      24.17%       16.64%     1.45
+  hf_noise          1.65%        1.65%     1.00
+  deviation         0.83%        0.61%     1.36
+  (reported for construct validity only; the rule is not changed by it)
+
+--- bad channels per subject ------------------------------------------------
+  tier1  0 ch: 11  1 ch: 10  2 ch: 21  3 ch: 16  4 ch: 19  5 ch: 22  6 ch: 9  7 ch: 6  8 ch: 5  9 ch: 2
+  tier2  0 ch: 10  1 ch: 11  2 ch: 21  3 ch: 16  4 ch: 17  5 ch: 24  6 ch: 8  7 ch: 7  8 ch: 5  9 ch: 2
+
+--- samples -----------------------------------------------------------------
+  full    keep 121 (ADHD 61 / Control 60)   exclude   0
+          exclusion rate  ADHD  0.0%  Control  0.0%  gap  0.0%p
+          length median   ADHD  143.7s  Control  122.1s  delta  +21.6s
+  tier1   keep  11 (ADHD  8 / Control  3)   exclude 110
+          exclusion rate  ADHD 86.9%  Control 95.0%  gap  8.1%p
+          length median   ADHD  131.6s  Control  129.3s  delta   +2.3s
+  tier2   keep  10 (ADHD  8 / Control  2)   exclude 111
+          exclusion rate  ADHD 86.9%  Control 96.7%  gap  9.8%p
+          length median   ADHD  131.6s  Control  129.8s  delta   +1.8s
+
+--- intersection with the ocular-IC roster (84 subjects) --------------------
+  full    84 subjects (ADHD 44 / Control 40)
+  tier1    7 subjects (ADHD  5 / Control  2)
+  tier2    6 subjects (ADHD  5 / Control  1)
+  -> this is the sample the pre-registered primary contrast runs on
+
+--- external cross-check: v56p ----------------------------------------------
+  v56p  corr:T8,P8
+  tier1 bad: ['T8', 'P8']
+  tier2 bad: ['T8', 'P8']
+  (Pastrana-Cortes et al. dropped this subject for FP1/FP2 contamination)
+
+--- written -----------------------------------------------------------------
+  C:\Users\사용자\Desktop\EEG data for ADHD -   Control children\results\screening\channel_quality.txt
+  C:\Users\사용자\Desktop\EEG data for ADHD -   Control children\results\screening\samples.csv
