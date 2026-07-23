@@ -1,0 +1,25 @@
+=== stages 8 + 10: primary analysis (UNBLINDED) ===
+PREREG 3.1 primary: (neural_ext + length + ocular) - (neural_ext + length)
+  subjects=84  epochs=1976  neural_features=306
+  k=30  K=5  seeds=50  bootstrap=2000
+
+  arm                 AUC(pooled)  AUC(fold)     acc   cols     sec
+  neural+L                  0.713      0.712   0.655    307     6.9
+  neural+L+ocular           0.730      0.723   0.679    310     7.2
+  neural+L+noise            0.715      0.714   0.655    310     7.1
+  neural                    0.632      0.630   0.631    306     6.8
+  neural+ocular             0.685      0.673   0.655    309     7.0
+
+[contrasts]  dAUC with 95% paired bootstrap CI
+  PRIMARY  ocular | length adj.       +0.017  [-0.051, +0.083]  CI includes 0  *
+  SECONDARY  ocular | unadjusted      +0.053  [-0.041, +0.151]  CI includes 0
+  stage 8   noise (dimension penalty)  +0.002  [-0.005, +0.010]  CI includes 0
+
+[stage 8] penalty-adjusted primary = +0.015 (raw +0.017 minus penalty +0.002)
+
+[PRIMARY VERDICT]  PREREG 3.5
+  CI includes 0 -> honest null. At n=84 an effect of this size cannot be
+  resolved; report the interval, not a point claim.
+
+  * CI covers subject sampling only, not model-training variability (PREREG 3.3).
+  * stopwatch baseline (stage 4): AUC 0.672 / 0.678.
