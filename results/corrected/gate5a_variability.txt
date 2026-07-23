@@ -1,0 +1,24 @@
+=== 5a confounder gate: variability ladder (length-robust base) ===
+PRIMARY (pre-specified): (neural+P) - neural, AUC, consistency over 3 clfs
+   n_subjects=84  n_epochs=1976  K=5  seed=42
+
+[AUC by arm]
+  arm                   RF  Logistic       SVM
+  neural             0.511     0.541     0.520
+  neural+P           0.489     0.558     0.570   <- PRIMARY
+  neural+P+C         0.550     0.587     0.614
+  neural+P+S         0.552     0.599     0.626
+  neural+P+C+S       0.548     0.585     0.645
+
+[dAUC vs neural   (mean . positive folds)]
+  arm                         RF        Logistic             SVM
+  neural+P       *      -0.022 0/5      +0.017 4/5      +0.049 4/5
+  neural+P+C            +0.038 4/5      +0.046 4/5      +0.094 4/5
+  neural+P+S            +0.041 3/5      +0.058 4/5      +0.105 4/5
+  neural+P+C+S          +0.037 3/5      +0.044 3/5      +0.125 4/5
+
+[PRIMARY VERDICT]  (neural+P) - neural
+  FAIL 2/3 classifiers positive -> length-robust ocular signal insufficient;
+       ocular advantage may depend on variability (the length pathway). 5b decides.
+  Note: pre-specified contrast, so this verdict is free of selection effects.
+        All arms reported regardless of outcome.
