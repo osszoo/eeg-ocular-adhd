@@ -6,3 +6,4 @@ __pycache__/
 exploration/_cache/
 results/*.csv
 results/conditions/*.csv
+results/conditions/oof/

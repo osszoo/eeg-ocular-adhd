@@ -1,0 +1,230 @@
+==============================================================================
+STAGE 4 CONTRASTS (PREREG 8.3 / 8.3.1)
+==============================================================================
+  full121    n=121
+  tier2_86   n=86
+  tact120    n=120
+  roster84   n=84
+  roster59   n=59
+  seeds=50  bootstrap=2000  K=5  mRMR k=30  Logistic C=1.0
+  estimator identical to primary_analysis.py
+
+[  1/ 50] full121    i_brain      n=121 AUC=0.798  fit       8.1s
+[  2/ 50] full121    iii_noica    n=121 AUC=0.813  fit      16.5s
+[  3/ 50] full121    iv_noasr     n=121 AUC=0.811  fit      24.8s
+[  4/ 50] full121    v_wideband   n=121 AUC=0.807  fit      33.1s
+[  5/ 50] tier2_86   i_brain      n= 86 AUC=0.785  fit      39.9s
+[  6/ 50] tier2_86   iii_noica    n= 86 AUC=0.817  fit      46.8s
+[  7/ 50] tier2_86   iv_noasr     n= 86 AUC=0.808  fit      53.7s
+[  8/ 50] tier2_86   v_wideband   n= 86 AUC=0.810  fit      60.6s
+[  9/ 50] tact120    i_brain      n=120 AUC=0.794  fit      68.6s
+[ 10/ 50] tact120    iii_noica    n=120 AUC=0.809  fit      76.9s
+[ 11/ 50] tact120    iv_noasr     n=120 AUC=0.805  fit      85.3s
+[ 12/ 50] tact120    v_wideband   n=120 AUC=0.804  fit      93.6s
+[ 13/ 50] roster84   i_brain      n= 84 AUC=0.713  fit     100.3s
+[ 14/ 50] roster84   iii_noica    n= 84 AUC=0.793  fit     107.3s
+[ 15/ 50] roster84   iv_noasr     n= 84 AUC=0.789  fit     114.2s
+[ 16/ 50] roster84   v_wideband   n= 84 AUC=0.794  fit     121.1s
+[ 17/ 50] roster59   i_brain      n= 59 AUC=0.720  fit     126.7s
+[ 18/ 50] roster59   iii_noica    n= 59 AUC=0.776  fit     132.5s
+[ 19/ 50] roster59   iv_noasr     n= 59 AUC=0.764  fit     138.3s
+[ 20/ 50] roster59   v_wideband   n= 59 AUC=0.775  fit     144.0s
+[ 21/ 50] roster84   ii_eye1      n= 84 AUC=0.756  fit     150.9s
+[ 22/ 50] roster84   ii_eyeall    n= 84 AUC=0.782  fit     157.9s
+[ 23/ 50] roster84   ii_c1        n= 84 AUC=0.741  fit     164.6s
+[ 24/ 50] roster84   ii_c2        n= 84 AUC=0.685  fit     171.4s
+[ 25/ 50] roster84   ii_c3        n= 84 AUC=0.732  fit     178.2s
+[ 26/ 50] roster84   ii_c4        n= 84 AUC=0.721  fit     185.1s
+[ 27/ 50] roster84   ii_c5        n= 84 AUC=0.723  fit     191.8s
+[ 28/ 50] roster84   ii_m1        n= 84 AUC=0.740  fit     198.5s
+[ 29/ 50] roster84   ii_m2        n= 84 AUC=0.711  fit     205.6s
+[ 30/ 50] roster84   ii_m3        n= 84 AUC=0.734  fit     212.7s
+[ 31/ 50] roster84   ii_m4        n= 84 AUC=0.729  fit     220.0s
+[ 32/ 50] roster84   ii_m5        n= 84 AUC=0.722  fit     227.0s
+[ 33/ 50] roster84   ii_s1        n= 84 AUC=0.753  fit     233.9s
+[ 34/ 50] roster84   ii_s2        n= 84 AUC=0.752  fit     240.7s
+[ 35/ 50] roster84   ii_s3        n= 84 AUC=0.751  fit     247.6s
+[ 36/ 50] roster59   ii_eye1      n= 59 AUC=0.776  fit     253.4s
+[ 37/ 50] roster59   ii_eyeall    n= 59 AUC=0.802  fit     259.3s
+[ 38/ 50] roster59   ii_c1        n= 59 AUC=0.709  fit     265.2s
+[ 39/ 50] roster59   ii_c2        n= 59 AUC=0.683  fit     270.9s
+[ 40/ 50] roster59   ii_c3        n= 59 AUC=0.706  fit     276.8s
+[ 41/ 50] roster59   ii_c4        n= 59 AUC=0.691  fit     282.3s
+[ 42/ 50] roster59   ii_c5        n= 59 AUC=0.752  fit     288.0s
+[ 43/ 50] roster59   ii_m1        n= 59 AUC=0.697  fit     293.9s
+[ 44/ 50] roster59   ii_m2        n= 59 AUC=0.695  fit     300.0s
+[ 45/ 50] roster59   ii_m3        n= 59 AUC=0.720  fit     305.9s
+[ 46/ 50] roster59   ii_m4        n= 59 AUC=0.742  fit     312.4s
+[ 47/ 50] roster59   ii_m5        n= 59 AUC=0.712  fit     318.5s
+[ 48/ 50] roster59   ii_s1        n= 59 AUC=0.795  fit     324.2s
+[ 49/ 50] roster59   ii_s2        n= 59 AUC=0.812  fit     329.9s
+[ 50/ 50] roster59   ii_s3        n= 59 AUC=0.808  fit     335.6s
+
+==============================================================================
+ABLATION LADDER -- what each preprocessing step costs
+==============================================================================
+One factor per rung. Positive means removing that step RAISES AUC,
+i.e. the step was discarding information the classifier could use.
+
+[full121]  n=121   stopwatch (length only) AUC = 0.656
+  condition            AUC  fold AUC
+  i_brain            0.798     0.797
+  iii_noica          0.813     0.813
+  iv_noasr           0.811     0.810
+  v_wideband         0.807     0.809
+  step                               dAUC   95% CI                
+  remove ICA                       +0.015   [-0.028, +0.059]  CI includes 0
+  remove ASR                       -0.001   [-0.013, +0.010]  CI includes 0
+  widen band to 0.5-60             -0.005   [-0.015, +0.004]  CI includes 0
+  TOTAL (all three)                +0.009   [-0.033, +0.051]  CI includes 0
+
+[tier2_86]  n=86   stopwatch (length only) AUC = 0.649
+  condition            AUC  fold AUC
+  i_brain            0.785     0.774
+  iii_noica          0.817     0.815
+  iv_noasr           0.808     0.812
+  v_wideband         0.810     0.815
+  step                               dAUC   95% CI                
+  remove ICA                       +0.032   [-0.020, +0.086]  CI includes 0
+  remove ASR                       -0.009   [-0.027, +0.006]  CI includes 0
+  widen band to 0.5-60             +0.003   [-0.008, +0.013]  CI includes 0
+  TOTAL (all three)                +0.025   [-0.028, +0.078]  CI includes 0
+
+[tact120]  n=120   stopwatch (length only) AUC = 0.654
+  condition            AUC  fold AUC
+  i_brain            0.794     0.792
+  iii_noica          0.809     0.811
+  iv_noasr           0.805     0.808
+  v_wideband         0.804     0.805
+  step                               dAUC   95% CI                
+  remove ICA                       +0.015   [-0.031, +0.059]  CI includes 0
+  remove ASR                       -0.003   [-0.016, +0.008]  CI includes 0
+  widen band to 0.5-60             -0.001   [-0.011, +0.008]  CI includes 0
+  TOTAL (all three)                +0.010   [-0.032, +0.053]  CI includes 0
+
+[roster84]  n=84   stopwatch (length only) AUC = 0.670
+  condition            AUC  fold AUC
+  i_brain            0.713     0.712
+  iii_noica          0.793     0.793
+  iv_noasr           0.789     0.783
+  v_wideband         0.794     0.790
+  step                               dAUC   95% CI                
+  remove ICA                       +0.081   [+0.019, +0.147]  CI>0
+  remove ASR                       -0.003   [-0.020, +0.013]  CI includes 0
+  widen band to 0.5-60             +0.005   [-0.008, +0.019]  CI includes 0
+  TOTAL (all three)                +0.082   [+0.017, +0.149]  CI>0
+
+[roster59]  n=59   stopwatch (length only) AUC = 0.675
+  condition            AUC  fold AUC
+  i_brain            0.720     0.726
+  iii_noica          0.776     0.779
+  iv_noasr           0.764     0.765
+  v_wideband         0.775     0.775
+  step                               dAUC   95% CI                
+  remove ICA                       +0.056   [-0.018, +0.131]  CI includes 0
+  remove ASR                       -0.013   [-0.050, +0.020]  CI includes 0
+  widen band to 0.5-60             +0.012   [-0.007, +0.034]  CI includes 0
+  TOTAL (all three)                +0.055   [-0.022, +0.134]  CI includes 0
+
+
+==============================================================================
+HYPOTHESIS BRANCH -- ocular IC kept in the signal, against 13 controls
+==============================================================================
+
+[roster84]  n=84   stopwatch (length only) AUC = 0.670
+  i_brain (baseline) AUC = 0.713
+
+  arm               AUC      dAUC            95% CI                
+  ii_eye1         0.756    +0.043   [-0.006, +0.098]   <- PRIMARY
+  ii_eyeall       0.782    +0.069   [+0.015, +0.131]   (secondary)
+
+  ii_c1           0.741    +0.029   [-0.006, +0.067]   as-is
+  ii_c2           0.685    -0.028   [-0.065, +0.005]   as-is
+  ii_c3           0.732    +0.020   [-0.015, +0.060]   as-is
+  ii_c4           0.721    +0.008   [-0.033, +0.051]   as-is
+  ii_c5           0.723    +0.011   [-0.025, +0.050]   as-is
+  ii_m1           0.740    +0.028   [-0.026, +0.083]   variance-matched
+  ii_m2           0.711    -0.003   [-0.056, +0.053]   variance-matched
+  ii_m3           0.734    +0.022   [-0.032, +0.080]   variance-matched
+  ii_m4           0.729    +0.015   [-0.048, +0.083]   variance-matched
+  ii_m5           0.722    +0.010   [-0.049, +0.072]   variance-matched
+  ii_s1           0.753    +0.041   [-0.019, +0.106]   phase surrogate
+  ii_s2           0.752    +0.039   [-0.023, +0.103]   phase surrogate
+  ii_s3           0.751    +0.038   [-0.021, +0.103]   phase surrogate
+
+  control null band : -0.028 to +0.041  (max: ii_s1)
+  primary contrast  : +0.043
+
+  by control family (reporting only, verdict rule unchanged)
+    as-is             max +0.029 (ii_c1 )   primary clears it: YES
+    variance-matched  max +0.028 (ii_m1 )   primary clears it: YES
+    phase surrogate   max +0.041 (ii_s1 )   primary clears it: YES
+    ii_c  answers: is any discarded IC enough? Under-powered, since
+          the leftovers are much smaller than the eye IC.
+    ii_m  answers: does an equally large NON-ocular component do the
+          same job? This is the real alternative explanation.
+    ii_s  answers: does the TEMPORAL structure of the ocular IC
+          matter beyond its spectrum and topography? It preserves
+          per-channel PSD and inter-channel phase, so the CLR (76)
+          and coherence (40) blocks are near-identical to ii_eye1:
+          116 of 306 features are shared with the treatment. Failing
+          to clear ii_s is not evidence that ocular information is
+          absent, only that it does not live in the time domain.
+
+  [VERDICT] PREREG 8.3.1
+    (a) CI lower bound > 0            : no
+    (b) exceeds every control arm     : YES
+    -> INCONCLUSIVE. One condition met, one not; PREREG forbids
+       reporting the favourable half alone.
+
+[roster59]  n=59   stopwatch (length only) AUC = 0.675
+  i_brain (baseline) AUC = 0.720
+
+  arm               AUC      dAUC            95% CI                
+  ii_eye1         0.776    +0.056   [-0.011, +0.129]   <- PRIMARY
+  ii_eyeall       0.802    +0.081   [+0.012, +0.162]   (secondary)
+
+  ii_c1           0.709    -0.011   [-0.068, +0.050]   as-is
+  ii_c2           0.683    -0.037   [-0.091, +0.013]   as-is
+  ii_c3           0.706    -0.013   [-0.068, +0.029]   as-is
+  ii_c4           0.691    -0.028   [-0.074, +0.005]   as-is
+  ii_c5           0.752    +0.033   [-0.010, +0.083]   as-is
+  ii_m1           0.697    -0.023   [-0.104, +0.059]   variance-matched
+  ii_m2           0.695    -0.025   [-0.107, +0.052]   variance-matched
+  ii_m3           0.720    +0.000   [-0.066, +0.069]   variance-matched
+  ii_m4           0.742    +0.023   [-0.054, +0.104]   variance-matched
+  ii_m5           0.712    -0.007   [-0.092, +0.076]   variance-matched
+  ii_s1           0.795    +0.074   [-0.001, +0.159]   phase surrogate
+  ii_s2           0.812    +0.090   [+0.010, +0.185]   phase surrogate
+  ii_s3           0.808    +0.086   [+0.010, +0.173]   phase surrogate
+
+  control null band : -0.037 to +0.090  (max: ii_s2)
+  primary contrast  : +0.056
+
+  by control family (reporting only, verdict rule unchanged)
+    as-is             max +0.033 (ii_c5 )   primary clears it: YES
+    variance-matched  max +0.023 (ii_m4 )   primary clears it: YES
+    phase surrogate   max +0.090 (ii_s2 )   primary clears it: no
+    ii_c  answers: is any discarded IC enough? Under-powered, since
+          the leftovers are much smaller than the eye IC.
+    ii_m  answers: does an equally large NON-ocular component do the
+          same job? This is the real alternative explanation.
+    ii_s  answers: does the TEMPORAL structure of the ocular IC
+          matter beyond its spectrum and topography? It preserves
+          per-channel PSD and inter-channel phase, so the CLR (76)
+          and coherence (40) blocks are near-identical to ii_eye1:
+          116 of 306 features are shared with the treatment. Failing
+          to clear ii_s is not evidence that ocular information is
+          absent, only that it does not live in the time domain.
+
+  [VERDICT] PREREG 8.3.1
+    (a) CI lower bound > 0            : no
+    (b) exceeds every control arm     : no
+    -> NOT SUPPORTED at this sample size. Report the interval.
+
+------------------------------------------------------------------------------
+CI covers subject sampling only, not model-training variability (PREREG 3.3).
+Interpretation limit (PREREG 8.3(5)): v_wideband reproduces the prior
+study's PREPROCESSING only. Epoching and model still differ, so a gap
+remaining here is not evidence against their result.
+elapsed: 8.4 min
