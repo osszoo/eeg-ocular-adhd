@@ -1,0 +1,16 @@
+=== stage 7b: enriched features, fold-internal mRMR (BLINDED) ===
+PREREG 3.7: ocular arms are NOT computed here.
+  epochs=2761  subjects=121  features=306  k=30  seeds=50
+
+  arm               AUC mean   AUC sd  acc mean  n_feat     sec
+  neural_base          0.537    0.031     0.524      25     5.3
+  length only          0.654    0.003     0.653       1     1.7
+  neural_ext           0.764    0.019     0.717     306     8.2
+  neural_ext+L         0.797    0.017     0.697     307     8.2
+
+[gain over baseline]  (paired over seeds)
+  neural_ext      dAUC  +0.227   positive seeds 50/50
+  neural_ext+L    dAUC  +0.260   positive seeds 50/50
+
+  * stopwatch baseline (stage 4, subject-level): AUC 0.672/0.678
+  * ocular arms remain blinded until the feature set is frozen (features-v1).
