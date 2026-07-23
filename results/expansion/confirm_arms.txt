@@ -1,0 +1,35 @@
+=== stage 9: confirmatory arms ===
+  subjects=84  epochs=1976  neural=306  neuvar=306  k=30  seeds=50  bootstrap=2000
+
+[arm 1] neural-variability control  (epoch level, mRMR pool includes neuvar)
+  arm                         AUC(pooled)  AUC(fold)     acc   cols     sec
+  neural+L                          0.713      0.712   0.655    307     6.7
+  neural+L+neuvar                   0.695      0.663   0.607    613    11.2
+  neural+L+neuvar+ocular            0.688      0.653   0.595    616    11.4
+  neural+L+ocular                   0.730      0.723   0.679    310     6.7
+
+  dAUC with 95% paired bootstrap CI
+  (a) neural variability | length adj.      -0.019  [-0.129, +0.092]  CI includes 0
+  (b) ocular BEYOND neural variability      -0.008  [-0.047, +0.027]  CI includes 0  <-
+      ocular | length adj. (primary, repeat)  +0.017  [-0.051, +0.083]  CI includes 0
+
+  [reading] if (a) is sizeable and (b) collapses, the ocular block is
+  interchangeable with generic across-epoch variability, and its specificity
+  to the ocular component is not supported.
+
+[arm 2] subject-level table (one row per subject, StratifiedKFold)
+  rows=84  ADHD=44  Control=40
+  arm                         AUC(pooled)  AUC(fold)     acc   cols     sec
+  neural+L                          0.668      0.659   0.607    307     1.7
+  neural+L+ocular                   0.689      0.667   0.643    310     1.7
+
+  dAUC with 95% paired bootstrap CI
+  ocular | length adj. (subject level)      +0.021  [-0.042, +0.078]  CI includes 0
+
+[summary]
+  epoch-level primary (repeat) : +0.017  [-0.051, +0.083]
+  subject-level equivalent     : +0.021  [-0.042, +0.078]
+  ocular beyond neural variab. : -0.008  [-0.047, +0.027]
+  aggregation methods agree    : yes
+
+  * confirmatory, not a substitute for the pre-registered primary verdict.
