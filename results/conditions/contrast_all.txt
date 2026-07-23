@@ -2,6 +2,7 @@
 STAGE 4 CONTRASTS (PREREG 8.3 / 8.3.1)
 ==============================================================================
   full121    n=121
+  tier1_91   n=91
   tier2_86   n=86
   tact120    n=120
   roster84   n=84
@@ -9,56 +10,60 @@ STAGE 4 CONTRASTS (PREREG 8.3 / 8.3.1)
   seeds=50  bootstrap=2000  K=5  mRMR k=30  Logistic C=1.0
   estimator identical to primary_analysis.py
 
-[  1/ 50] full121    i_brain      n=121 AUC=0.798  fit       8.1s
-[  2/ 50] full121    iii_noica    n=121 AUC=0.813  fit      16.5s
-[  3/ 50] full121    iv_noasr     n=121 AUC=0.811  fit      24.8s
-[  4/ 50] full121    v_wideband   n=121 AUC=0.807  fit      33.1s
-[  5/ 50] tier2_86   i_brain      n= 86 AUC=0.785  fit      39.9s
-[  6/ 50] tier2_86   iii_noica    n= 86 AUC=0.817  fit      46.8s
-[  7/ 50] tier2_86   iv_noasr     n= 86 AUC=0.808  fit      53.7s
-[  8/ 50] tier2_86   v_wideband   n= 86 AUC=0.810  fit      60.6s
-[  9/ 50] tact120    i_brain      n=120 AUC=0.794  fit      68.6s
-[ 10/ 50] tact120    iii_noica    n=120 AUC=0.809  fit      76.9s
-[ 11/ 50] tact120    iv_noasr     n=120 AUC=0.805  fit      85.3s
-[ 12/ 50] tact120    v_wideband   n=120 AUC=0.804  fit      93.6s
-[ 13/ 50] roster84   i_brain      n= 84 AUC=0.713  fit     100.3s
-[ 14/ 50] roster84   iii_noica    n= 84 AUC=0.793  fit     107.3s
-[ 15/ 50] roster84   iv_noasr     n= 84 AUC=0.789  fit     114.2s
-[ 16/ 50] roster84   v_wideband   n= 84 AUC=0.794  fit     121.1s
-[ 17/ 50] roster59   i_brain      n= 59 AUC=0.720  fit     126.7s
-[ 18/ 50] roster59   iii_noica    n= 59 AUC=0.776  fit     132.5s
-[ 19/ 50] roster59   iv_noasr     n= 59 AUC=0.764  fit     138.3s
-[ 20/ 50] roster59   v_wideband   n= 59 AUC=0.775  fit     144.0s
-[ 21/ 50] roster84   ii_eye1      n= 84 AUC=0.756  fit     150.9s
-[ 22/ 50] roster84   ii_eyeall    n= 84 AUC=0.782  fit     157.9s
-[ 23/ 50] roster84   ii_c1        n= 84 AUC=0.741  fit     164.6s
-[ 24/ 50] roster84   ii_c2        n= 84 AUC=0.685  fit     171.4s
-[ 25/ 50] roster84   ii_c3        n= 84 AUC=0.732  fit     178.2s
-[ 26/ 50] roster84   ii_c4        n= 84 AUC=0.721  fit     185.1s
-[ 27/ 50] roster84   ii_c5        n= 84 AUC=0.723  fit     191.8s
-[ 28/ 50] roster84   ii_m1        n= 84 AUC=0.740  fit     198.5s
-[ 29/ 50] roster84   ii_m2        n= 84 AUC=0.711  fit     205.6s
-[ 30/ 50] roster84   ii_m3        n= 84 AUC=0.734  fit     212.7s
-[ 31/ 50] roster84   ii_m4        n= 84 AUC=0.729  fit     220.0s
-[ 32/ 50] roster84   ii_m5        n= 84 AUC=0.722  fit     227.0s
-[ 33/ 50] roster84   ii_s1        n= 84 AUC=0.753  fit     233.9s
-[ 34/ 50] roster84   ii_s2        n= 84 AUC=0.752  fit     240.7s
-[ 35/ 50] roster84   ii_s3        n= 84 AUC=0.751  fit     247.6s
-[ 36/ 50] roster59   ii_eye1      n= 59 AUC=0.776  fit     253.4s
-[ 37/ 50] roster59   ii_eyeall    n= 59 AUC=0.802  fit     259.3s
-[ 38/ 50] roster59   ii_c1        n= 59 AUC=0.709  fit     265.2s
-[ 39/ 50] roster59   ii_c2        n= 59 AUC=0.683  fit     270.9s
-[ 40/ 50] roster59   ii_c3        n= 59 AUC=0.706  fit     276.8s
-[ 41/ 50] roster59   ii_c4        n= 59 AUC=0.691  fit     282.3s
-[ 42/ 50] roster59   ii_c5        n= 59 AUC=0.752  fit     288.0s
-[ 43/ 50] roster59   ii_m1        n= 59 AUC=0.697  fit     293.9s
-[ 44/ 50] roster59   ii_m2        n= 59 AUC=0.695  fit     300.0s
-[ 45/ 50] roster59   ii_m3        n= 59 AUC=0.720  fit     305.9s
-[ 46/ 50] roster59   ii_m4        n= 59 AUC=0.742  fit     312.4s
-[ 47/ 50] roster59   ii_m5        n= 59 AUC=0.712  fit     318.5s
-[ 48/ 50] roster59   ii_s1        n= 59 AUC=0.795  fit     324.2s
-[ 49/ 50] roster59   ii_s2        n= 59 AUC=0.812  fit     329.9s
-[ 50/ 50] roster59   ii_s3        n= 59 AUC=0.808  fit     335.6s
+[  1/ 54] full121    i_brain      n=121 AUC=0.798  cache     0.0s
+[  2/ 54] full121    iii_noica    n=121 AUC=0.813  cache     0.0s
+[  3/ 54] full121    iv_noasr     n=121 AUC=0.811  cache     0.0s
+[  4/ 54] full121    v_wideband   n=121 AUC=0.807  cache     0.0s
+[  5/ 54] tier1_91   i_brain      n= 91 AUC=0.807  fit       7.0s
+[  6/ 54] tier1_91   iii_noica    n= 91 AUC=0.815  fit      14.2s
+[  7/ 54] tier1_91   iv_noasr     n= 91 AUC=0.815  fit      21.4s
+[  8/ 54] tier1_91   v_wideband   n= 91 AUC=0.811  fit      28.5s
+[  9/ 54] tier2_86   i_brain      n= 86 AUC=0.785  cache    28.5s
+[ 10/ 54] tier2_86   iii_noica    n= 86 AUC=0.817  cache    28.5s
+[ 11/ 54] tier2_86   iv_noasr     n= 86 AUC=0.808  cache    28.5s
+[ 12/ 54] tier2_86   v_wideband   n= 86 AUC=0.810  cache    28.5s
+[ 13/ 54] tact120    i_brain      n=120 AUC=0.794  cache    28.5s
+[ 14/ 54] tact120    iii_noica    n=120 AUC=0.809  cache    28.5s
+[ 15/ 54] tact120    iv_noasr     n=120 AUC=0.805  cache    28.5s
+[ 16/ 54] tact120    v_wideband   n=120 AUC=0.804  cache    28.5s
+[ 17/ 54] roster84   i_brain      n= 84 AUC=0.713  cache    28.6s
+[ 18/ 54] roster84   iii_noica    n= 84 AUC=0.793  cache    28.6s
+[ 19/ 54] roster84   iv_noasr     n= 84 AUC=0.789  cache    28.6s
+[ 20/ 54] roster84   v_wideband   n= 84 AUC=0.794  cache    28.6s
+[ 21/ 54] roster59   i_brain      n= 59 AUC=0.720  cache    28.6s
+[ 22/ 54] roster59   iii_noica    n= 59 AUC=0.776  cache    28.6s
+[ 23/ 54] roster59   iv_noasr     n= 59 AUC=0.764  cache    28.6s
+[ 24/ 54] roster59   v_wideband   n= 59 AUC=0.775  cache    28.6s
+[ 25/ 54] roster84   ii_eye1      n= 84 AUC=0.756  cache    28.6s
+[ 26/ 54] roster84   ii_eyeall    n= 84 AUC=0.782  cache    28.6s
+[ 27/ 54] roster84   ii_c1        n= 84 AUC=0.741  cache    28.6s
+[ 28/ 54] roster84   ii_c2        n= 84 AUC=0.685  cache    28.6s
+[ 29/ 54] roster84   ii_c3        n= 84 AUC=0.732  cache    28.7s
+[ 30/ 54] roster84   ii_c4        n= 84 AUC=0.721  cache    28.7s
+[ 31/ 54] roster84   ii_c5        n= 84 AUC=0.723  cache    28.7s
+[ 32/ 54] roster84   ii_m1        n= 84 AUC=0.740  cache    28.7s
+[ 33/ 54] roster84   ii_m2        n= 84 AUC=0.711  cache    28.7s
+[ 34/ 54] roster84   ii_m3        n= 84 AUC=0.734  cache    28.7s
+[ 35/ 54] roster84   ii_m4        n= 84 AUC=0.729  cache    28.7s
+[ 36/ 54] roster84   ii_m5        n= 84 AUC=0.722  cache    28.7s
+[ 37/ 54] roster84   ii_s1        n= 84 AUC=0.753  cache    28.7s
+[ 38/ 54] roster84   ii_s2        n= 84 AUC=0.752  cache    28.7s
+[ 39/ 54] roster84   ii_s3        n= 84 AUC=0.751  cache    28.7s
+[ 40/ 54] roster59   ii_eye1      n= 59 AUC=0.776  cache    28.8s
+[ 41/ 54] roster59   ii_eyeall    n= 59 AUC=0.802  cache    28.8s
+[ 42/ 54] roster59   ii_c1        n= 59 AUC=0.709  cache    28.8s
+[ 43/ 54] roster59   ii_c2        n= 59 AUC=0.683  cache    28.8s
+[ 44/ 54] roster59   ii_c3        n= 59 AUC=0.706  cache    28.8s
+[ 45/ 54] roster59   ii_c4        n= 59 AUC=0.691  cache    28.8s
+[ 46/ 54] roster59   ii_c5        n= 59 AUC=0.752  cache    28.8s
+[ 47/ 54] roster59   ii_m1        n= 59 AUC=0.697  cache    28.8s
+[ 48/ 54] roster59   ii_m2        n= 59 AUC=0.695  cache    28.8s
+[ 49/ 54] roster59   ii_m3        n= 59 AUC=0.720  cache    28.8s
+[ 50/ 54] roster59   ii_m4        n= 59 AUC=0.742  cache    28.9s
+[ 51/ 54] roster59   ii_m5        n= 59 AUC=0.712  cache    28.9s
+[ 52/ 54] roster59   ii_s1        n= 59 AUC=0.795  cache    28.9s
+[ 53/ 54] roster59   ii_s2        n= 59 AUC=0.812  cache    28.9s
+[ 54/ 54] roster59   ii_s3        n= 59 AUC=0.808  cache    28.9s
 
 ==============================================================================
 ABLATION LADDER -- what each preprocessing step costs
@@ -67,23 +72,35 @@ One factor per rung. Positive means removing that step RAISES AUC,
 i.e. the step was discarding information the classifier could use.
 
 [full121]  n=121   stopwatch (length only) AUC = 0.656
-  condition            AUC  fold AUC
-  i_brain            0.798     0.797
-  iii_noica          0.813     0.813
-  iv_noasr           0.811     0.810
-  v_wideband         0.807     0.809
+  condition            AUC  fold AUC      acc     sens     spec
+  i_brain            0.798     0.797    0.694    0.656    0.733
+  iii_noica          0.813     0.813    0.711    0.705    0.717
+  iv_noasr           0.811     0.810    0.727    0.721    0.733
+  v_wideband         0.807     0.809    0.719    0.705    0.733
   step                               dAUC   95% CI                
   remove ICA                       +0.015   [-0.028, +0.059]  CI includes 0
   remove ASR                       -0.001   [-0.013, +0.010]  CI includes 0
   widen band to 0.5-60             -0.005   [-0.015, +0.004]  CI includes 0
   TOTAL (all three)                +0.009   [-0.033, +0.051]  CI includes 0
 
+[tier1_91]  n=91   stopwatch (length only) AUC = 0.634
+  condition            AUC  fold AUC      acc     sens     spec
+  i_brain            0.807     0.800    0.714    0.674    0.756
+  iii_noica          0.815     0.810    0.725    0.717    0.733
+  iv_noasr           0.815     0.811    0.714    0.696    0.733
+  v_wideband         0.811     0.811    0.714    0.696    0.733
+  step                               dAUC   95% CI                
+  remove ICA                       +0.009   [-0.047, +0.065]  CI includes 0
+  remove ASR                       -0.000   [-0.013, +0.013]  CI includes 0
+  widen band to 0.5-60             -0.004   [-0.016, +0.006]  CI includes 0
+  TOTAL (all three)                +0.004   [-0.052, +0.059]  CI includes 0
+
 [tier2_86]  n=86   stopwatch (length only) AUC = 0.649
-  condition            AUC  fold AUC
-  i_brain            0.785     0.774
-  iii_noica          0.817     0.815
-  iv_noasr           0.808     0.812
-  v_wideband         0.810     0.815
+  condition            AUC  fold AUC      acc     sens     spec
+  i_brain            0.785     0.774    0.721    0.667    0.780
+  iii_noica          0.817     0.815    0.744    0.711    0.780
+  iv_noasr           0.808     0.812    0.744    0.711    0.780
+  v_wideband         0.810     0.815    0.744    0.711    0.780
   step                               dAUC   95% CI                
   remove ICA                       +0.032   [-0.020, +0.086]  CI includes 0
   remove ASR                       -0.009   [-0.027, +0.006]  CI includes 0
@@ -91,11 +108,11 @@ i.e. the step was discarding information the classifier could use.
   TOTAL (all three)                +0.025   [-0.028, +0.078]  CI includes 0
 
 [tact120]  n=120   stopwatch (length only) AUC = 0.654
-  condition            AUC  fold AUC
-  i_brain            0.794     0.792
-  iii_noica          0.809     0.811
-  iv_noasr           0.805     0.808
-  v_wideband         0.804     0.805
+  condition            AUC  fold AUC      acc     sens     spec
+  i_brain            0.794     0.792    0.692    0.639    0.746
+  iii_noica          0.809     0.811    0.717    0.721    0.712
+  iv_noasr           0.805     0.808    0.708    0.689    0.729
+  v_wideband         0.804     0.805    0.717    0.705    0.729
   step                               dAUC   95% CI                
   remove ICA                       +0.015   [-0.031, +0.059]  CI includes 0
   remove ASR                       -0.003   [-0.016, +0.008]  CI includes 0
@@ -103,11 +120,11 @@ i.e. the step was discarding information the classifier could use.
   TOTAL (all three)                +0.010   [-0.032, +0.053]  CI includes 0
 
 [roster84]  n=84   stopwatch (length only) AUC = 0.670
-  condition            AUC  fold AUC
-  i_brain            0.713     0.712
-  iii_noica          0.793     0.793
-  iv_noasr           0.789     0.783
-  v_wideband         0.794     0.790
+  condition            AUC  fold AUC      acc     sens     spec
+  i_brain            0.713     0.712    0.655    0.614    0.700
+  iii_noica          0.793     0.793    0.690    0.636    0.750
+  iv_noasr           0.789     0.783    0.690    0.659    0.725
+  v_wideband         0.794     0.790    0.726    0.682    0.775
   step                               dAUC   95% CI                
   remove ICA                       +0.081   [+0.019, +0.147]  CI>0
   remove ASR                       -0.003   [-0.020, +0.013]  CI includes 0
@@ -115,11 +132,11 @@ i.e. the step was discarding information the classifier could use.
   TOTAL (all three)                +0.082   [+0.017, +0.149]  CI>0
 
 [roster59]  n=59   stopwatch (length only) AUC = 0.675
-  condition            AUC  fold AUC
-  i_brain            0.720     0.726
-  iii_noica          0.776     0.779
-  iv_noasr           0.764     0.765
-  v_wideband         0.775     0.775
+  condition            AUC  fold AUC      acc     sens     spec
+  i_brain            0.720     0.726    0.661    0.581    0.750
+  iii_noica          0.776     0.779    0.678    0.677    0.679
+  iv_noasr           0.764     0.765    0.678    0.645    0.714
+  v_wideband         0.775     0.775    0.678    0.645    0.714
   step                               dAUC   95% CI                
   remove ICA                       +0.056   [-0.018, +0.131]  CI includes 0
   remove ASR                       -0.013   [-0.050, +0.020]  CI includes 0
@@ -132,25 +149,24 @@ HYPOTHESIS BRANCH -- ocular IC kept in the signal, against 13 controls
 ==============================================================================
 
 [roster84]  n=84   stopwatch (length only) AUC = 0.670
-  i_brain (baseline) AUC = 0.713
+  arm              AUC     acc    sens    spec      dAUC  95% CI            
+  i_brain        0.713   0.655   0.614   0.700 -- baseline
+  ii_eye1        0.756   0.667   0.636   0.700    +0.043  [-0.006, +0.098]  <- PRIMARY
+  ii_eyeall      0.782   0.702   0.636   0.775    +0.069  [+0.015, +0.131]  (secondary)
 
-  arm               AUC      dAUC            95% CI                
-  ii_eye1         0.756    +0.043   [-0.006, +0.098]   <- PRIMARY
-  ii_eyeall       0.782    +0.069   [+0.015, +0.131]   (secondary)
-
-  ii_c1           0.741    +0.029   [-0.006, +0.067]   as-is
-  ii_c2           0.685    -0.028   [-0.065, +0.005]   as-is
-  ii_c3           0.732    +0.020   [-0.015, +0.060]   as-is
-  ii_c4           0.721    +0.008   [-0.033, +0.051]   as-is
-  ii_c5           0.723    +0.011   [-0.025, +0.050]   as-is
-  ii_m1           0.740    +0.028   [-0.026, +0.083]   variance-matched
-  ii_m2           0.711    -0.003   [-0.056, +0.053]   variance-matched
-  ii_m3           0.734    +0.022   [-0.032, +0.080]   variance-matched
-  ii_m4           0.729    +0.015   [-0.048, +0.083]   variance-matched
-  ii_m5           0.722    +0.010   [-0.049, +0.072]   variance-matched
-  ii_s1           0.753    +0.041   [-0.019, +0.106]   phase surrogate
-  ii_s2           0.752    +0.039   [-0.023, +0.103]   phase surrogate
-  ii_s3           0.751    +0.038   [-0.021, +0.103]   phase surrogate
+  ii_c1          0.741   0.690   0.659   0.725    +0.029  [-0.006, +0.067]  as-is
+  ii_c2          0.685   0.631   0.591   0.675    -0.028  [-0.065, +0.005]  as-is
+  ii_c3          0.732   0.679   0.636   0.725    +0.020  [-0.015, +0.060]  as-is
+  ii_c4          0.721   0.643   0.614   0.675    +0.008  [-0.033, +0.051]  as-is
+  ii_c5          0.723   0.667   0.636   0.700    +0.011  [-0.025, +0.050]  as-is
+  ii_m1          0.740   0.667   0.636   0.700    +0.028  [-0.026, +0.083]  variance-matched
+  ii_m2          0.711   0.619   0.614   0.625    -0.003  [-0.056, +0.053]  variance-matched
+  ii_m3          0.734   0.679   0.659   0.700    +0.022  [-0.032, +0.080]  variance-matched
+  ii_m4          0.729   0.631   0.568   0.700    +0.015  [-0.048, +0.083]  variance-matched
+  ii_m5          0.722   0.619   0.568   0.675    +0.010  [-0.049, +0.072]  variance-matched
+  ii_s1          0.753   0.690   0.659   0.725    +0.041  [-0.019, +0.106]  phase surrogate
+  ii_s2          0.752   0.690   0.659   0.725    +0.039  [-0.023, +0.103]  phase surrogate
+  ii_s3          0.751   0.667   0.659   0.675    +0.038  [-0.021, +0.103]  phase surrogate
 
   control null band : -0.028 to +0.041  (max: ii_s1)
   primary contrast  : +0.043
@@ -178,25 +194,24 @@ HYPOTHESIS BRANCH -- ocular IC kept in the signal, against 13 controls
        reporting the favourable half alone.
 
 [roster59]  n=59   stopwatch (length only) AUC = 0.675
-  i_brain (baseline) AUC = 0.720
+  arm              AUC     acc    sens    spec      dAUC  95% CI            
+  i_brain        0.720   0.661   0.581   0.750 -- baseline
+  ii_eye1        0.776   0.712   0.677   0.750    +0.056  [-0.011, +0.129]  <- PRIMARY
+  ii_eyeall      0.802   0.746   0.710   0.786    +0.081  [+0.012, +0.162]  (secondary)
 
-  arm               AUC      dAUC            95% CI                
-  ii_eye1         0.776    +0.056   [-0.011, +0.129]   <- PRIMARY
-  ii_eyeall       0.802    +0.081   [+0.012, +0.162]   (secondary)
-
-  ii_c1           0.709    -0.011   [-0.068, +0.050]   as-is
-  ii_c2           0.683    -0.037   [-0.091, +0.013]   as-is
-  ii_c3           0.706    -0.013   [-0.068, +0.029]   as-is
-  ii_c4           0.691    -0.028   [-0.074, +0.005]   as-is
-  ii_c5           0.752    +0.033   [-0.010, +0.083]   as-is
-  ii_m1           0.697    -0.023   [-0.104, +0.059]   variance-matched
-  ii_m2           0.695    -0.025   [-0.107, +0.052]   variance-matched
-  ii_m3           0.720    +0.000   [-0.066, +0.069]   variance-matched
-  ii_m4           0.742    +0.023   [-0.054, +0.104]   variance-matched
-  ii_m5           0.712    -0.007   [-0.092, +0.076]   variance-matched
-  ii_s1           0.795    +0.074   [-0.001, +0.159]   phase surrogate
-  ii_s2           0.812    +0.090   [+0.010, +0.185]   phase surrogate
-  ii_s3           0.808    +0.086   [+0.010, +0.173]   phase surrogate
+  ii_c1          0.709   0.695   0.613   0.786    -0.011  [-0.068, +0.050]  as-is
+  ii_c2          0.683   0.644   0.613   0.679    -0.037  [-0.091, +0.013]  as-is
+  ii_c3          0.706   0.661   0.613   0.714    -0.013  [-0.068, +0.029]  as-is
+  ii_c4          0.691   0.678   0.613   0.750    -0.028  [-0.074, +0.005]  as-is
+  ii_c5          0.752   0.695   0.645   0.750    +0.033  [-0.010, +0.083]  as-is
+  ii_m1          0.697   0.695   0.677   0.714    -0.023  [-0.104, +0.059]  variance-matched
+  ii_m2          0.695   0.627   0.613   0.643    -0.025  [-0.107, +0.052]  variance-matched
+  ii_m3          0.720   0.678   0.677   0.679    +0.000  [-0.066, +0.069]  variance-matched
+  ii_m4          0.742   0.678   0.581   0.786    +0.023  [-0.054, +0.104]  variance-matched
+  ii_m5          0.712   0.712   0.677   0.750    -0.007  [-0.092, +0.076]  variance-matched
+  ii_s1          0.795   0.695   0.645   0.750    +0.074  [-0.001, +0.159]  phase surrogate
+  ii_s2          0.812   0.712   0.677   0.750    +0.090  [+0.010, +0.185]  phase surrogate
+  ii_s3          0.808   0.729   0.677   0.786    +0.086  [+0.010, +0.173]  phase surrogate
 
   control null band : -0.037 to +0.090  (max: ii_s2)
   primary contrast  : +0.056
@@ -227,4 +242,4 @@ CI covers subject sampling only, not model-training variability (PREREG 3.3).
 Interpretation limit (PREREG 8.3(5)): v_wideband reproduces the prior
 study's PREPROCESSING only. Epoching and model still differ, so a gap
 remaining here is not evidence against their result.
-elapsed: 8.4 min
+elapsed: 3.3 min

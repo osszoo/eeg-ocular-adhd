@@ -31,6 +31,15 @@ WHY THIRTEEN CONTROLS
               amplification factor exactly 1. The tightest control available.
   The maximum over all of them is the bar the primary contrast has to clear.
 
+SECONDARY METRICS (PREREG 8.3.3)
+  Accuracy is reported next to AUC because the study this work compares against
+  reports 87.5% accuracy, and AUC alone cannot be placed beside that number.
+  Sensitivity and specificity are printed with it, never without: this project
+  has already established that part of any accuracy gain here comes from
+  threshold asymmetry rather than information, and accuracy alone hides that.
+  All three are read off the cached subject probabilities at threshold 0.5, so
+  they cost nothing and no model is refitted.
+
 LENGTH
   Recording length enters every arm as a pass-through covariate, exactly as in
   PREREG 3.1, so the contrast measures what the reconstruction adds beyond length.
@@ -84,7 +93,8 @@ CONTROLS = (['ii_c%d' % k for k in range(1, 6)] +
             ['ii_s%d' % k for k in range(1, 4)])
 HYPOTHESIS = ['i_brain', 'ii_eye1', 'ii_eyeall'] + CONTROLS
 
-LADDER_SAMPLES = ['full121', 'tier2_86', 'tact120', 'roster84', 'roster59']
+LADDER_SAMPLES = ['full121', 'tier1_91', 'tier2_86', 'tact120',
+                  'roster84', 'roster59']
 HYP_SAMPLES = ['roster84', 'roster59']
 
 
@@ -108,6 +118,7 @@ def build_samples():
 
     return {
         'full121': set(tier['in_full']),
+        'tier1_91': set(tier['in_tier1']),
         'tier2_86': set(tier['in_tier2']),
         'tact120': set(tier['in_full']) - {TACT_EXCLUDED},
         'roster84': set(roster),
@@ -191,6 +202,20 @@ def stopwatch(sample, keep, seeds, force=False):
     return auc
 
 
+def metrics(y_sub, p_sub):
+    """Accuracy, sensitivity, specificity at threshold 0.5 from cached probabilities.
+
+    Reported together by design (PREREG 8.3.3). Specificity collapse has already
+    been observed in this project, so accuracy without the two rates is misleading.
+    """
+    pred = (np.asarray(p_sub) >= 0.5).astype(int)
+    y = np.asarray(y_sub).astype(int)
+    acc = float((pred == y).mean())
+    sens = float(pred[y == 1].mean()) if (y == 1).any() else float('nan')
+    spec = float((1 - pred[y == 0]).mean()) if (y == 0).any() else float('nan')
+    return acc, sens, spec
+
+
 def aligned(a, b):
     """Paired comparison requires the identical subject list in the same order."""
     return a is not None and b is not None and a['subs'] == b['subs']
@@ -210,12 +235,15 @@ def report_ladder(store, samples, n_boot):
             continue
         print('[%s]  n=%d   stopwatch (length only) AUC = %.3f'
               % (s, len(arms['i_brain']['subs']), store.get(('sw', s), float('nan'))))
-        print('  %-14s %9s %9s' % ('condition', 'AUC', 'fold AUC'))
+        print('  %-14s %9s %9s %8s %8s %8s'
+              % ('condition', 'AUC', 'fold AUC', 'acc', 'sens', 'spec'))
         for c in LADDER:
             if arms.get(c) is None:
                 print('  %-14s %9s' % (c, 'n/a'))
                 continue
-            print('  %-14s %9.3f %9.3f' % (c, arms[c]['auc'], arms[c]['fold']))
+            acc, sens, spec = metrics(arms[c]['y'], arms[c]['p'])
+            print('  %-14s %9.3f %9.3f %8.3f %8.3f %8.3f'
+                  % (c, arms[c]['auc'], arms[c]['fold'], acc, sens, spec))
 
         print('  %-30s %8s   %-22s' % ('step', 'dAUC', '95% CI'))
         for base, comb, label in (('i_brain', 'iii_noica', 'remove ICA'),
@@ -243,34 +271,39 @@ def report_hypothesis(store, n_boot):
             continue
         print('\n[%s]  n=%d   stopwatch (length only) AUC = %.3f'
               % (s, len(base['subs']), store.get(('sw', s), float('nan'))))
-        print('  i_brain (baseline) AUC = %.3f\n' % base['auc'])
 
         def contrast(cond):
             arm = store.get((s, cond))
             if not aligned(base, arm):
                 return None
             m, lo, hi, _ = paired_bootstrap(base['y'], base['p'], arm['p'], n_boot)
-            return arm['auc'], m, lo, hi
+            acc, sens, spec = metrics(arm['y'], arm['p'])
+            return arm['auc'], m, lo, hi, acc, sens, spec
 
-        print('  %-12s %8s %9s %10s %-22s' % ('arm', 'AUC', 'dAUC', '', '95% CI'))
+        def line(name, r, tag):
+            print('  %-12s %7.3f %7.3f %7.3f %7.3f %+9.3f  [%+.3f, %+.3f] %s'
+                  % (name, r[0], r[4], r[5], r[6], r[1], r[2], r[3], tag))
+
+        bacc, bsens, bspec = metrics(base['y'], base['p'])
+        print('  %-12s %7s %7s %7s %7s %9s  %-18s'
+              % ('arm', 'AUC', 'acc', 'sens', 'spec', 'dAUC', '95% CI'))
+        print('  %-12s %7.3f %7.3f %7.3f %7.3f %9s'
+              % ('i_brain', base['auc'], bacc, bsens, bspec, '-- baseline'))
         prim = contrast('ii_eye1')
         if prim:
-            print('  %-12s %8.3f %+9.3f   [%+.3f, %+.3f]   <- PRIMARY'
-                  % ('ii_eye1', prim[0], prim[1], prim[2], prim[3]))
+            line('ii_eye1', prim, ' <- PRIMARY')
         allv = contrast('ii_eyeall')
         if allv:
-            print('  %-12s %8.3f %+9.3f   [%+.3f, %+.3f]   (secondary)'
-                  % ('ii_eyeall', allv[0], allv[1], allv[2], allv[3]))
+            line('ii_eyeall', allv, ' (secondary)')
 
         print()
         ctrl = {}
+        fam = {'c': 'as-is', 'm': 'variance-matched', 's': 'phase surrogate'}
         for c in CONTROLS:
             r = contrast(c)
             if r:
                 ctrl[c] = r
-                fam = {'c': 'as-is', 'm': 'variance-matched', 's': 'phase surrogate'}
-                print('  %-12s %8.3f %+9.3f   [%+.3f, %+.3f]   %s'
-                      % (c, r[0], r[1], r[2], r[3], fam[c[3]]))
+                line(c, r, ' ' + fam[c[3]])
 
         if not prim or not ctrl:
             continue
