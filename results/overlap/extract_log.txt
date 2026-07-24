@@ -1,0 +1,164 @@
+==============================================================================
+STAGE 2 -- 6 s epochs at 50%% overlap (PREREG 8.3(6))
+==============================================================================
+epoch      : 6 s = 768 samples
+stride     : 768 (non-overlap) / 384 (50% overlap)
+signal     : brain-only, restored from exploration/_cache/brain_*.npz
+features   : 306, definitions frozen at features-v1
+subjects   : 121
+
+[  1/121] v10p     ep  18 ->  35  dev 7.6e-05     3.3s
+[  2/121] v12p     ep  22 ->  43  dev 5.9e-05     7.6s
+[  3/121] v14p     ep  22 ->  43  dev 6.4e-05    11.9s
+[  4/121] v15p     ep  56 -> 111  dev 6.4e-05    23.0s
+[  5/121] v173     ep  31 ->  61  dev 6.5e-05    28.6s
+[  6/121] v18p     ep  32 ->  63  dev 6.2e-05    34.8s
+[  7/121] v19p     ep  30 ->  59  dev 6.3e-05    40.8s
+[  8/121] v1p      ep  15 ->  29  dev 6.4e-05    43.7s
+[  9/121] v20p     ep  46 ->  91  dev 6.4e-05    52.5s
+[ 10/121] v21p     ep  21 ->  41  dev 6.4e-05    56.5s
+[ 11/121] v22p     ep  15 ->  29  dev 6.3e-05    59.3s
+[ 12/121] v24p     ep  21 ->  41  dev 6.3e-05    63.2s
+[ 13/121] v25p     ep  12 ->  23  dev 6.2e-05    65.7s
+[ 14/121] v27p     ep  37 ->  73  dev 6.2e-05    72.8s
+[ 15/121] v28p     ep  35 ->  69  dev 6.4e-05    79.3s
+[ 16/121] v29p     ep  31 ->  61  dev 6.1e-05    85.8s
+[ 17/121] v30p     ep  28 ->  55  dev 6.2e-05    91.1s
+[ 18/121] v31p     ep  15 ->  29  dev 6.1e-05    94.0s
+[ 19/121] v32p     ep  23 ->  45  dev 6.0e-05    98.2s
+[ 20/121] v33p     ep  38 ->  75  dev 6.4e-05   105.5s
+[ 21/121] v34p     ep  25 ->  49  dev 6.0e-05   110.1s
+[ 22/121] v35p     ep  19 ->  37  dev 6.0e-05   113.5s
+[ 23/121] v36p     ep  22 ->  43  dev 6.3e-05   117.4s
+[ 24/121] v37p     ep  12 ->  23  dev 6.0e-05   119.5s
+[ 25/121] v38p     ep  32 ->  63  dev 6.4e-05   125.8s
+[ 26/121] v39p     ep  23 ->  45  dev 6.1e-05   129.9s
+[ 27/121] v3p      ep  43 ->  85  dev 6.4e-05   137.6s
+[ 28/121] v40p     ep  26 ->  51  dev 6.3e-05   142.6s
+[ 29/121] v6p      ep  22 ->  43  dev 5.9e-05   146.6s
+[ 30/121] v8p      ep  20 ->  39  dev 6.0e-05   150.1s
+[ 31/121] v177     ep  21 ->  41  dev 6.1e-05   153.9s
+[ 32/121] v179     ep  16 ->  31  dev 6.3e-05   156.7s
+[ 33/121] v181     ep  13 ->  25  dev 6.1e-05   159.1s
+[ 34/121] v183     ep  24 ->  47  dev 6.3e-05   163.7s
+[ 35/121] v190     ep  20 ->  39  dev 6.2e-05   167.5s
+[ 36/121] v196     ep  17 ->  33  dev 6.3e-05   170.5s
+[ 37/121] v198     ep  25 ->  49  dev 9.0e-05   175.1s
+[ 38/121] v200     ep  16 ->  31  dev 6.4e-05   178.0s
+[ 39/121] v204     ep  26 ->  51  dev 6.1e-05   182.7s
+[ 40/121] v206     ep  26 ->  51  dev 6.1e-05   187.4s
+[ 41/121] v209     ep  39 ->  77  dev 6.5e-05   194.5s
+[ 42/121] v213     ep  16 ->  31  dev 6.4e-05   197.5s
+[ 43/121] v215     ep  27 ->  53  dev 6.3e-05   202.3s
+[ 44/121] v219     ep  35 ->  69  dev 6.2e-05   208.4s
+[ 45/121] v227     ep  36 ->  71  dev 6.5e-05   215.0s
+[ 46/121] v231     ep  25 ->  49  dev 6.4e-05   219.5s
+[ 47/121] v234     ep  44 ->  87  dev 6.3e-05   227.3s
+[ 48/121] v236     ep  17 ->  33  dev 6.4e-05   230.7s
+[ 49/121] v238     ep  12 ->  23  dev 6.4e-05   232.9s
+[ 50/121] v244     ep  50 ->  99  dev 6.6e-05   241.8s
+[ 51/121] v246     ep  27 ->  53  dev 6.2e-05   246.6s
+[ 52/121] v250     ep  18 ->  35  dev 6.3e-05   249.9s
+[ 53/121] v254     ep  13 ->  25  dev 5.8e-05   252.3s
+[ 54/121] v263     ep  24 ->  47  dev 6.0e-05   256.8s
+[ 55/121] v265     ep  23 ->  45  dev 6.1e-05   261.0s
+[ 56/121] v270     ep  30 ->  59  dev 6.2e-05   266.5s
+[ 57/121] v274     ep  22 ->  43  dev 6.4e-05   270.4s
+[ 58/121] v279     ep  26 ->  51  dev 6.4e-05   275.1s
+[ 59/121] v284     ep  20 ->  39  dev 6.2e-05   278.8s
+[ 60/121] v286     ep  14 ->  27  dev 6.3e-05   281.2s
+[ 61/121] v288     ep  26 ->  51  dev 6.0e-05   286.0s
+[ 62/121] v107     ep  25 ->  49  dev 1.5e-04   290.8s
+[ 63/121] v108     ep  24 ->  47  dev 6.4e-05   295.4s
+[ 64/121] v109     ep  20 ->  39  dev 6.1e-05   299.3s
+[ 65/121] v110     ep  21 ->  41  dev 6.3e-05   303.0s
+[ 66/121] v111     ep  19 ->  37  dev 6.0e-05   306.5s
+[ 67/121] v112     ep  20 ->  39  dev 6.4e-05   310.4s
+[ 68/121] v113     ep  20 ->  39  dev 6.2e-05   313.9s
+[ 69/121] v114     ep  17 ->  33  dev 6.2e-05   317.0s
+[ 70/121] v115     ep  20 ->  39  dev 6.0e-05   320.5s
+[ 71/121] v116     ep  25 ->  49  dev 6.2e-05   325.0s
+[ 72/121] v41p     ep  16 ->  31  dev 6.2e-05   327.9s
+[ 73/121] v42p     ep  21 ->  41  dev 6.5e-05   332.3s
+[ 74/121] v43p     ep  16 ->  31  dev 6.0e-05   335.2s
+[ 75/121] v44p     ep  14 ->  27  dev 6.3e-05   337.6s
+[ 76/121] v45p     ep  14 ->  27  dev 5.9e-05   340.1s
+[ 77/121] v46p     ep  12 ->  23  dev 6.3e-05   342.3s
+[ 78/121] v47p     ep  14 ->  27  dev 6.4e-05   344.9s
+[ 79/121] v48p     ep  13 ->  25  dev 5.9e-05   347.3s
+[ 80/121] v49p     ep  21 ->  41  dev 6.4e-05   351.0s
+[ 81/121] v50p     ep  21 ->  41  dev 6.1e-05   354.8s
+[ 82/121] v51p     ep  10 ->  19  dev 6.1e-05   356.6s
+[ 83/121] v52p     ep  18 ->  35  dev 6.3e-05   359.8s
+[ 84/121] v53p     ep  24 ->  47  dev 6.3e-05   364.5s
+[ 85/121] v54p     ep  25 ->  49  dev 6.4e-05   370.2s
+[ 86/121] v55p     ep  18 ->  35  dev 6.4e-05   373.4s
+[ 87/121] v56p     ep  18 ->  35  dev 6.3e-05   376.7s
+[ 88/121] v57p     ep  19 ->  37  dev 6.3e-05   380.1s
+[ 89/121] v58p     ep  18 ->  35  dev 6.2e-05   383.3s
+[ 90/121] v59p     ep  21 ->  41  dev 6.5e-05   387.1s
+[ 91/121] v60p     ep  16 ->  31  dev 6.4e-05   390.2s
+[ 92/121] v117     ep  33 ->  65  dev 6.1e-05   396.2s
+[ 93/121] v118     ep  15 ->  29  dev 6.0e-05   398.8s
+[ 94/121] v120     ep  15 ->  29  dev 6.4e-05   401.7s
+[ 95/121] v121     ep  21 ->  41  dev 6.3e-05   405.5s
+[ 96/121] v123     ep  18 ->  35  dev 6.5e-05   408.6s
+[ 97/121] v125     ep  20 ->  39  dev 6.4e-05   412.2s
+[ 98/121] v127     ep  19 ->  37  dev 6.3e-05   415.4s
+[ 99/121] v129     ep  14 ->  27  dev 6.4e-05   417.9s
+[100/121] v131     ep  21 ->  41  dev 6.2e-05   421.6s
+[101/121] v133     ep  19 ->  37  dev 6.4e-05   425.0s
+[102/121] v134     ep  17 ->  33  dev 6.1e-05   427.9s
+[103/121] v138     ep  16 ->  31  dev 6.1e-05   430.8s
+[104/121] v140     ep  22 ->  43  dev 6.4e-05   434.7s
+[105/121] v143     ep  20 ->  39  dev 6.3e-05   438.7s
+[106/121] v147     ep  18 ->  35  dev 6.4e-05   442.1s
+[107/121] v149     ep  22 ->  43  dev 6.0e-05   447.0s
+[108/121] v151     ep  27 ->  53  dev 6.4e-05   451.9s
+[109/121] v297     ep  17 ->  33  dev 6.5e-05   454.9s
+[110/121] v298     ep  23 ->  45  dev 6.5e-05   459.0s
+[111/121] v299     ep  28 ->  55  dev 6.4e-05   464.0s
+[112/121] v300     ep  33 ->  65  dev 6.2e-05   470.8s
+[113/121] v302     ep  23 ->  45  dev 5.9e-05   475.2s
+[114/121] v303     ep  25 ->  49  dev 6.3e-05   479.6s
+[115/121] v304     ep  17 ->  33  dev 6.2e-05   482.7s
+[116/121] v305     ep  29 ->  57  dev 6.5e-05   487.8s
+[117/121] v306     ep  23 ->  45  dev 6.0e-05   491.9s
+[118/121] v307     ep  29 ->  57  dev 6.1e-05   497.1s
+[119/121] v308     ep  22 ->  43  dev 6.5e-05   501.0s
+[120/121] v309     ep  32 ->  63  dev 6.4e-05   507.1s
+[121/121] v310     ep  23 ->  45  dev 6.4e-05   511.5s
+
+  ov00  subjects=121 epochs= 2761 NaN=0 Inf=0  features_i_brain_ov00.csv
+
+  ov50  subjects=121 epochs= 5401 NaN=0 Inf=0  features_i_brain_ov50.csv
+
+------------------------------------------------------------------------------
+REASSEMBLY CHECK -- ov00 against the stage 4 i_brain table
+------------------------------------------------------------------------------
+  subjects compared : 121, all epochs, all 306 features
+  deviation is max|difference| divided by that feature's own std
+  median 1.1e-05   p99 7.6e-05   max 1.5e-04
+  features above 1e-4 : 1 of 306
+  worst five:
+    variance_Fp2                 1.53e-04
+    std_O1                       9.07e-05
+    kurtosis_P7                  8.98e-05
+    kurtosis_Fp2                 7.59e-05
+    variance_O1                  7.45e-05
+
+  what this means for the classifier:
+    features are standardised before fitting, so a deviation of 1.5e-04
+    is a shift of 1.5e-04 in standardised units. With logistic
+    coefficients of order 0.1 to 1 that moves the logit by about
+    2e-04 and a predicted probability by less than that.
+
+  caveat: this spans two pipeline executions, so it includes any
+  run-to-run difference in ASR and ICA, not only rounding. Moment
+  based features (variance, std, kurtosis) surface such differences
+  first because they are driven by extreme samples.
+  The ov00/ov50 contrast is not affected: both are cut from the same
+  restored signal. The decisive check is the AUC comparison in
+  contrast_overlap.py.
+epoch inflation: 2761 -> 5401 rows (expected about 2x - 1 per subject)
+elapsed: 8.5 min

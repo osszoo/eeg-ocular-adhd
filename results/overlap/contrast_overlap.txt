@@ -1,0 +1,86 @@
+==============================================================================
+STAGE 2 CONTRAST -- 50%% epoch overlap (PREREG 8.3(6))
+==============================================================================
+  seeds=50  bootstrap=2000  K=5  mRMR k=30  Logistic C=1.0
+  promotion needs dAUC >= +0.03 on ALL of: full121, tier1_91, tier2_86
+  signal fixed to brain-only (PREREG 8.3.3(3)); no stacking of stage 4
+
+  full121    ov00  n=121 epochs= 2761 AUC=0.798  fit       8.6s
+  full121    ov50  n=121 epochs= 5401 AUC=0.793  fit      22.0s
+  tier1_91   ov00  n= 91 epochs= 2088 AUC=0.807  fit      31.2s
+  tier1_91   ov50  n= 91 epochs= 4085 AUC=0.803  fit      42.4s
+  tier2_86   ov00  n= 86 epochs= 1983 AUC=0.785  fit      50.9s
+  tier2_86   ov50  n= 86 epochs= 3880 AUC=0.783  fit      61.5s
+  tact120    ov00  n=120 epochs= 2743 AUC=0.794  fit      71.4s
+  tact120    ov50  n=120 epochs= 5366 AUC=0.791  fit      84.7s
+  roster84   ov00  n= 84 epochs= 1976 AUC=0.713  fit      93.5s
+  roster84   ov50  n= 84 epochs= 3868 AUC=0.720  fit     104.1s
+  roster59   ov00  n= 59 epochs= 1402 AUC=0.720  fit     111.2s
+  roster59   ov50  n= 59 epochs= 2745 AUC=0.720  fit     119.4s
+
+==============================================================================
+VALIDATION -- ov00 must reproduce the stage 4 i_brain condition
+==============================================================================
+  sample       ov00 AUC     stage4     diff
+  full121         0.798      0.798   +0.000
+  tier1_91        0.807      0.807   +0.000
+  tier2_86        0.785      0.785   +0.000
+  tact120         0.794      0.794   -0.000
+  roster84        0.713      0.713   -0.000
+  roster59        0.720      0.720   +0.000
+  Differences at the third decimal mean the reassembled signal is the
+  one stage 4 used, and the feature-level deviation was rounding.
+
+==============================================================================
+CONTRAST -- ov50 minus ov00
+==============================================================================
+
+[full121]  n=121   stopwatch AUC = 0.656  <- decision sample
+  arm        AUC     acc    sens    spec   epochs
+  ov00     0.798   0.694   0.656   0.733     2761
+  ov50     0.793   0.686   0.656   0.717     5401
+  dAUC -0.005   [-0.014, +0.004]   CI includes 0
+
+[tier1_91]  n=91   stopwatch AUC = 0.634  <- decision sample
+  arm        AUC     acc    sens    spec   epochs
+  ov00     0.807   0.714   0.674   0.756     2088
+  ov50     0.803   0.714   0.674   0.756     4085
+  dAUC -0.004   [-0.022, +0.012]   CI includes 0
+
+[tier2_86]  n=86   stopwatch AUC = 0.649  <- decision sample
+  arm        AUC     acc    sens    spec   epochs
+  ov00     0.785   0.721   0.667   0.780     1983
+  ov50     0.783   0.709   0.644   0.780     3880
+  dAUC -0.002   [-0.016, +0.012]   CI includes 0
+
+[tact120]  n=120   stopwatch AUC = 0.654
+  arm        AUC     acc    sens    spec   epochs
+  ov00     0.794   0.692   0.639   0.746     2743
+  ov50     0.791   0.683   0.639   0.729     5366
+  dAUC -0.003   [-0.012, +0.005]   CI includes 0
+
+[roster84]  n=84   stopwatch AUC = 0.670
+  arm        AUC     acc    sens    spec   epochs
+  ov00     0.713   0.655   0.614   0.700     1976
+  ov50     0.720   0.655   0.591   0.725     3868
+  dAUC +0.008   [-0.006, +0.023]   CI includes 0
+
+[roster59]  n=59   stopwatch AUC = 0.675
+  arm        AUC     acc    sens    spec   epochs
+  ov00     0.720   0.661   0.581   0.750     1402
+  ov50     0.720   0.678   0.613   0.750     2745
+  dAUC +0.000   [-0.021, +0.020]   CI includes 0
+
+==============================================================================
+[PROMOTION VERDICT] PREREG 8.3(6)
+==============================================================================
+  full121    dAUC -0.005  >= +0.03 : no
+  tier1_91   dAUC -0.004  >= +0.03 : no
+  tier2_86   dAUC -0.002  >= +0.03 : no
+
+  -> DO NOT PROMOTE. Overlap stays an exploratory arm; the primary
+     design remains 6 s non-overlapping epochs.
+     This does not clear epoching as a cause of the gap to the prior
+     study: only overlap was testable, not the 2 s epoch length.
+
+elapsed: 2.3 min
