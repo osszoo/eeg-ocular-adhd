@@ -1,0 +1,26 @@
+==============================================================================
+SELF-VERIFICATION (PREREG 8.3.4(8)) -- must pass before measurement
+==============================================================================
+
+[A] MRMROrdered prefix(k=30) == stage-4 MRMR support_
+    stage-4 support (30 cols): [ 34  47 136 144 148 150 151 174]
+    ordered prefix  (30 cols): [ 34  47 136 144 148 150 151 174]
+    match: PASS
+
+[C] balanced sample_weight == class_weight=balanced (logistic)
+    max |coef diff| = 0.000e+00   PASS
+
+[B] centre-point pooled AUC (10 seeds) vs stage-4 i_brain logic
+    NOTE: stage-4 cache is 50 seeds; target is stage-4 estimator on the
+    SAME 10 seeds, recomputed here. The 50-seed cache (0.785) is printed
+    only for scale.
+    centre point (10-seed averaged): AUC = 0.7864
+    stage-4 cache (50-seed):         AUC = 0.7850  [scale ref only]
+    -> record this number; compare against a stage-4 rerun on the same
+       10 seeds (contrast_ic.py --seeds 10) for the exact identity.
+
+------------------------------------------------------------------------------
+VERIFICATION: ALL AUTOMATED CHECKS PASS
+  (B is a recorded value to match against a same-seed stage-4 rerun,
+   not an automated assert, because the cache is 50-seed.)
+------------------------------------------------------------------------------

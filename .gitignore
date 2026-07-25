@@ -10,4 +10,3 @@ results/conditions/oof/
 results/overlap/*.csv
 results/overlap/oof/
 results/ceiling/*.csv
-results/ceiling/*.txt
